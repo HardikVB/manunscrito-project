@@ -1,0 +1,38 @@
+* {
+    font-family: Arial, sans-serif;
+}
+
+.logo-img {
+    width: 250px;
+    height: 40px;
+}
+
+.navbar {
+    min-height: 10vh;
+}
+
+.navbar-nav {
+    gap: 20px;
+    align-items: center;
+}
+
+.login-shopping-container {
+    background-color: #EEEEEE;
+    display: flex;
+    border-radius: 50px;
+    padding: 5px;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    gap: 20px;
+}
+
+.login-shopping-container .nav-link {
+    margin: 0px 5px;
+    background-color: white;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

@@ -1,0 +1,29 @@
+{
+  "name": "manunscrito-project",
+  "version": "1.0.0",
+  "description": "Manunscrito Backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HardikVB/manunscrito-project.git"
+  },
+  "author": "Hardik Bachu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HardikVB/manunscrito-project/issues"
+  },
+  "homepage": "https://github.com/HardikVB/manunscrito-project#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.10.0",
+    "sequelize": "^6.37.3"
+  }
+}
