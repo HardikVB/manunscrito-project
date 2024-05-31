@@ -25,7 +25,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-Alteração de website para uma nova tecnólogia neste caso foi migrado o site https://omanuscrito.pt/ para um novo website (dominio ainda por ver) 
+Alteração de website para uma nova tecnólogia neste caso foi migrado o site https://omanuscritohistorico.pt/ para um novo website (dominio ainda por ver) 
 tive a ideia de integrar a framework Express.js e Node.js para a criação do backend junto com HTML, CSS e Javacript em função do front-end
 
  * Authenticação e medidas para implementação de uma base de dados MySQL Implementadas e integradas
