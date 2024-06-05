@@ -1,3 +1,9 @@
+body {
+    min-height: 100%;
+    position: relative;
+    top: 0;
+}
+
 .filter-column {
     display: flex;
     align-items: center;
@@ -20,8 +26,6 @@
     padding: 0;
 }
 
-
-
 .custom-card {
     display: flex;
     align-items: center;
@@ -32,6 +36,7 @@
     border-radius: 15px;
     margin: 20px;
     cursor: pointer;
+    width: 100%;
 }
 
 .add-product {

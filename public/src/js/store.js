@@ -1,17 +1,24 @@
-$('.add-product').click(() => {
+$(document).ready(function() {
     let accessToken = localStorage.getItem('accessToken');
 
-    if(!accessToken) return;
+    setTimeout(() => {
+        $.ajax({
+            type: 'POST',
+            url: '/store/verify',
+            headers: {
+                "Authorization": "Bearer " + accessToken
+            },
+            success: function(response) {
+                $('.store-products').html(response + $('.store-products').html())
+            },
+            error: function() {
+                console.error('Failed to fetch additional nav items.');
+            },
+            complete: function() {
+                $('.loading.verification-remove').remove()
 
-    
-    let spinner = '<div class="loader"></div>';
-    let curtain = '<div class="loading-curtain"></div>'
-
-    let mainContent = $('body').html();
-
-    $('body').css("overflow", "hidden");
-
-    $('body').html(spinner + curtain + mainContent);
-
-    $('body').css("overflow-y", "auto");
+                $('body').css("overflow-y", "auto");
+            }
+        });
+    }, 2000)
 })

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { findUserByUsername } = require('../utils/db')
+const { findUserByEmail } = require('../utils/db')
 const { generateAccessToken } = require('../utils/auth')
 const bcrypt = require('bcrypt')
 
@@ -11,10 +11,10 @@ router.get('/', (req, res) => {
 router.post('/', async (req, res) => {
     console.log(`[POST] Login`)
 
-    const { username, password } = req.body;
+    const { email, password } = req.body;
 
     try {
-        const user = await findUserByUsername(username);
+        const user = await findUserByEmail(email);
 
         if (user == null) {
             return res.status(400).send('Nome de utilizador ou palavra-passe incorretos');

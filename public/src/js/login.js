@@ -6,14 +6,14 @@ $(document).ready(function() {
     $('#loginForm').submit(function(event) {
         event.preventDefault(); // Evita o envio padrão do formulário
 
-        var username = $('#username').val();
+        var email = $('#email').val();
         var password = $('#password').val();
 
         $.ajax({
             type: 'POST',
             url: '/login',
             data: {
-                username: username,
+                email: email,
                 password: password
             },
             success: function(response) {

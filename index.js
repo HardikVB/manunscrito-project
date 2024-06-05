@@ -17,7 +17,7 @@ const loginRoute = require('./routes/login');
 const registerRoute = require('./routes/register');
 const storeRoute = require('./routes/store');
 const buyRoute = require('./routes/buy');
-const dashboardRoute = require('./routes/dashboard');
+const dashboardRoute = require('./routes/dashboard')
 
 app.use('/', homeRoute);
 app.use('/login', loginRoute);

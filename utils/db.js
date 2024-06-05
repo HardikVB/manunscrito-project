@@ -48,8 +48,8 @@ const User = sequelize.define('User', {
 // Sincronização do modelo com a base de dados
 sequelize.sync();
 
-const findUserByUsername = async (username) => {
-  return await User.findOne({ where: { username } });
+const findUserByEmail = async (Email) => {
+  return await User.findOne({ where: { Email } });
 };
 
 const addUser = async (username, email, password) => {
@@ -57,6 +57,6 @@ const addUser = async (username, email, password) => {
 };
 
 module.exports = {
-  findUserByUsername,
+  findUserByEmail,
   addUser,
 };
