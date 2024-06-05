@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
-const { authenticateToken } = require('../utils/auth');
+const { authenticateToken, getUserToken } = require('../utils/auth');
+
+const { findUserByUsername } = require('../utils/db');
 
 router.get('/', authenticateToken, async (req, res) => {
   try {
@@ -19,7 +21,7 @@ router.get('/', authenticateToken, async (req, res) => {
     console.log(error)
   }
 
-  return res.sendStatus(401)
+  return
 });
 
 module.exports = router;
