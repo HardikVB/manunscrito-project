@@ -14,9 +14,11 @@
 .navbar-nav {
     gap: 20px;
     align-items: center;
+    min-height: 35px;
 }
 
 .login-shopping-container {
+    margin: 0 !important;
     background-color: #EEEEEE;
     display: flex;
     border-radius: 50px;
@@ -24,15 +26,37 @@
     justify-content: space-between;
     margin-bottom: 10px;
     gap: 20px;
+    min-width: 175px;
+    height: 45px;
 }
 
 .login-shopping-container .nav-link {
-    margin: 0px 5px;
+    margin: 0px;
     background-color: white;
     border-radius: 50%;
     width: 35px;
-    height: 35px;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+@keyframes loadingAnimation {
+        0% {
+            background-position: -30vw 0
+        }
+        100% {
+            background-position: 70vw 0
+        }
+    }
+  
+.loading {
+    animation-duration: 15s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-name: loadingAnimation;
+    animation-timing-function: linear;
+    background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+    width: 100%;
+    padding: 0;
+    position: relative;
 }

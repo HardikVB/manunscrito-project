@@ -1,0 +1,40 @@
+.filter-column {
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    overflow-y: auto;
+    position: sticky;
+    top: 0;
+    background-color: black;
+    color: white;
+    flex-direction: column;
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+.row {
+    width: 100%;
+}
+
+.store-column {
+    padding: 0;
+}
+
+
+
+.custom-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 40vh;
+    background-color: rgb(235, 235, 235);
+    border-radius: 15px;
+    margin: 20px;
+    cursor: pointer;
+}
+
+.add-product {
+    border-style: dashed;
+    border-color: rgb(65, 65, 65);
+}

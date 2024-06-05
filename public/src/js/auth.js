@@ -27,17 +27,31 @@ $('.verify-login').click(function(event) {
 $(document).ready(function() {
     let accessToken = localStorage.getItem('accessToken');
 
-    if(accessToken != null) {
-        $.ajax({
-            type: 'POST',
-            url: '/',
-            headers: {
-                "Authorization": "Berear " + accessToken
-            },
-            success: function(response) {
-                let previousContent = $('.login-shopping-container').html();
-                $('.login-shopping-container').html(previousContent + response);
-            }
-        });
-    }
+    let navItems = `<a class="nav-link" href="/login"><i class="fas fa-user"></i></a>
+                    <a class="nav-link" href="/shopping-cart"><i class="fas fa-shopping-cart"></i></a>`;
+
+    setTimeout(() => {
+        if (accessToken != null) {
+            $.ajax({
+                type: 'POST',
+                url: '/',
+                headers: {
+                    "Authorization": "Bearer " + accessToken
+                },
+                success: function(response) {
+                    navItems += response;
+                },
+                error: function() {
+                    console.error('Failed to fetch additional nav items.');
+                },
+                complete: function() {
+                    $('.login-shopping-container').html(navItems).removeClass('loading');
+                }
+            });
+        } else {
+            $('.login-shopping-container').html(navItems).removeClass('loading');
+        }
+    }, 1000)
+
+    
 })
