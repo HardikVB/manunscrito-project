@@ -1,30 +1,75 @@
 const express = require('express');
+const { Product } = require('../utils/db');
 const router = express.Router();
 
-const { authenticateToken, getUserToken } = require('../utils/auth');
-const { findUserByEmail } = require('../utils/db')
+// Rota para obter produtos com paginação
+router.get('/products', async (req, res) => {
+    const page = parseInt(req.query.page) || 1; // Converter para número inteiro
+    const pageSize = parseInt(req.query.pageSize) || 10; // Tamanho padrão da página
+  
+    try {
+      const { count, rows } = await Product.findAndCountAll({
+        limit: pageSize,
+        offset: (page - 1) * pageSize,
+      });
+      
+      console.log({ count, products: rows })
+      res.json({ count, products: rows });
+    } catch (error) {
+      console.error('Error fetching products:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+});
+  
+// Rota para adicionar um novo produto
+router.post('/add', async (req, res) => {
+  // Implemente a verificação de autenticação e privilégios aqui
+  // Por exemplo, você pode usar middleware para isso
+  // Exemplo:
+  // if (!req.user.isAdmin) {
+  //   return res.status(403).json({ error: 'Unauthorized' });
+  // }
 
+  const { title, image, price, description } = req.body;
 
-router.get('/', (req, res) => {
-  res.render('store');
+  try {
+    const product = await Product.create({ title, image, price, description });
+    res.json(product);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
 });
 
-router.post('/verify', authenticateToken, async (req, res) => {
-  console.log(`[POST] Verify Admin Privilage Store`)
+// Rota para editar um produto existente por ID
+router.put('/edit/:id', async (req, res) => {
+  // Implemente a verificação de autenticação e privilégios aqui
+  // Por exemplo, você pode usar middleware para isso
+  // Exemplo:
+  // if (!req.user.isAdmin) {
+  //   return res.status(403).json({ error: 'Unauthorized' });
+  // }
+
+  const productId = req.params.id;
+  const { title, image, price, description } = req.body;
+
   try {
-    let userTokenFind = getUserToken(req.headers['authorization'] || req.query['token'])
-
-    if(!userTokenFind) return res.sendStatus(401)
-
-    let user = await findUserByEmail(userTokenFind.email)
-
-    if(user.privilege == "admin") {
-      return res.send(`<div class="col-lg-4"><div class="custom-card add-product"><h1>+</h1><h5>Adicionar Produto</h5></div></div>`)
+    const product = await Product.findByPk(productId);
+    if (!product) {
+      return res.status(404).json({ error: 'Product not found' });
     }
 
-} catch (error) {
-    console.log(error)
-}
-})
+    product.title = title;
+    product.image = image;
+    product.price = price;
+    product.description = description;
+    
+    await product.save();
+    res.json(product);
+  } catch (error) {
+    console.error('Error updating product:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
 
-module.exports = router
+module.exports = router;

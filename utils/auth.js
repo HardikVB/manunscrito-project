@@ -30,7 +30,7 @@ const authenticateToken = (req, res, next) => {
 };
 
 const generateAccessToken = (user) => {
-  return jwt.sign({ id: user.id, email: user.email }, SECRET_KEY);
+  return jwt.sign({ id: user.id, email: user.email, privilege: user.privilege }, SECRET_KEY);
 };
 
 module.exports = {

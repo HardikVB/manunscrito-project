@@ -1,0 +1,12 @@
+<div id="carouselExample" class="carousel slide" data-bs-ride="carousel" data-bs-pause="hover"> 
+    <div class="carousel-inner text-light text-center"> 
+        <div *ngFor="let item of items; let i = index" class="carousel-item bg-white" [class.active]="i == 0" data-bs-interval="2000"> 
+            <img [src]="item.src" alt="Banner Image {{ i }}" class="img-fluid w-100">
+            <h1 class="banner-title">{{item.title}}</h1>
+        </div> 
+    </div> 
+
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExample" *ngFor="let item of items; let i = index" [attr.data-bs-slide-to]="i" [class.active]="i == 0" aria-current="true"></button>
+    </div>
+</div> 

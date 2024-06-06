@@ -1,0 +1,8 @@
+
+<div class="card h-100 border rounded-3" (click)="clickedOnProduct($event)">
+    <img [src]="product.image" class="card-img-top" alt="{{ product.title }}" [hidden]="!product.image">
+    <div class="card-body">
+        <h5 [classList]="!product.image ? 'card-title text-center': 'card-title'">{{ product.title }}</h5>
+        <p [classList]="!product.image ? 'card-title text-center': 'card-title'">{{ product.description }}</p>
+    </div>
+</div>

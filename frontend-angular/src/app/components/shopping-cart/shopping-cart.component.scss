@@ -1,0 +1,17 @@
+.products {
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    width: 30%;
+    z-index: 999;
+    background-color: black;
+    transition: 1s;
+}
+
+.closed {
+    right: -30%;
+}
+
+.opened {
+    right: 0%;
+}

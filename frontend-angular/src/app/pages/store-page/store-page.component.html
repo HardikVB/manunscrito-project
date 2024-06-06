@@ -1,0 +1,30 @@
+<app-header></app-header>
+
+<div class="store-container">
+  <!-- Exibe um indicador de carregamento se a variável loading for true -->
+  <div *ngIf="loading" class="loading-spinner">Carregando...</div>
+  <!-- Conteúdo normal da página -->
+  <div *ngIf="!loading" class="row w-100">
+    <div class="col-3">
+      Filtro
+    </div>
+    <div class="col-9">
+      <div class="row w-100" style="gap: 20px 0px;">
+        <div class="col-lg-3 col-md-6 col-sm-12" [hidden]="!isAdmin">
+          <admin-item [title]="'Adicionar Produto'" [icon]="'+'" (clickItem)="addProductModal()"></admin-item>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12" *ngFor="let product of products">
+          <product-item [product]="product"></product-item>
+        </div>
+      </div>
+      <!-- Paginação -->
+      <div class="pagination">
+        <button (click)="previousPage()">Anterior</button>
+        <span>Página {{ currentPage }} de {{ calculateNumberPages() }}</span>
+        <button (click)="nextPage()">Próxima</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<modal [hidden]="!modalOpen" (clickBackground)="modalOpen = !modalOpen" (saveProductClick)="saveProduct($event)"></modal>

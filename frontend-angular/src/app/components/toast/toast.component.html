@@ -1,0 +1,14 @@
+<div *ngFor="let toast of toasts" class="toast-capsule">
+  <span class="toast-icon">
+    <ng-container [ngSwitch]="toast.type">
+      <i *ngSwitchCase="0" class="icon-success">✔️</i>
+      <i *ngSwitchCase="1" class="icon-error">❌</i>
+      <i *ngSwitchCase="2" class="icon-info">ℹ️</i>
+      <i *ngSwitchDefault>ℹ️</i>
+    </ng-container>
+  </span>
+  <div class="toast-body-container">
+    <span class="toast-title">{{ toast.title }}</span>
+    <span class="toast-message">{{ toast.message }}</span>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+header {
+    position: sticky;
+    top: 0;
+    z-index: 99;
+}
+
+.logo-img {
+    width: 250px;
+    height: 40px;
+}
+
+.navbar {
+    min-height: 10vh;
+}
+
+.navbar-nav {
+    gap: 20px;
+    align-items: center;
+    min-height: 35px;
+}
+
+.login-shopping-container {
+    margin: 0 !important;
+    background-color: #EEEEEE;
+    display: flex;
+    border-radius: 50px;
+    padding: 5px;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    gap: 20px;
+    min-width: 100%;
+    height: 45px;
+}
+
+.login-shopping-container .nav-link {
+    margin: 0px;
+    background-color: white;
+    border-radius: 50%;
+    width: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

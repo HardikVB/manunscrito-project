@@ -1,12 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { findUserByEmail } = require('../utils/db')
+const { findUserByEmail } = require('../utils/db-functions')
 const { generateAccessToken } = require('../utils/auth')
 const bcrypt = require('bcrypt')
-
-router.get('/', (req, res) => {
-  res.render('login');
-});
 
 router.post('/', async (req, res) => {
     console.log(`[POST] Login`)
@@ -29,11 +25,10 @@ router.post('/', async (req, res) => {
 
         // Se as senhas coincidirem, gerar e enviar token de acesso
         const accessToken = generateAccessToken(user);
-        res.send(accessToken);
+
+        res.send({accessToken: accessToken})
 
     } catch (error) {
-        console.log(error)
-
         res.status(500).send('Erro ao fazer login');
     }
 });

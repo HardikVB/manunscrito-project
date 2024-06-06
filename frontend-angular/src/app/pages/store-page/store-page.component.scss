@@ -1,0 +1,48 @@
+/* Estilo para o contêiner da página */
+.store-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
+}
+
+/* Estilo para o botão "Adicionar Produto" */
+.add-product button {
+  display: block;
+  width: 100%;
+  padding: 10px 0;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #ffffff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-product button:hover {
+  background-color: #0056b3;
+}
+
+/* Estilo para a paginação */
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f5f5f5;
+  cursor: pointer;
+}
+
+.pagination button:hover {
+  background-color: #e0e0e0;
+}
+
+.pagination span {
+  font-size: 14px;
+}

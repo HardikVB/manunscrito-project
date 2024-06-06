@@ -1,0 +1,33 @@
+.card {
+    border-radius: 15px;
+    transition: box-shadow 0.3s ease;
+    min-height: 30vh;
+    display: flex;
+    cursor: pointer;
+
+    .card-body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+  }
+  
+  .card:hover {
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-body {
+    padding: 1.25rem;
+  }
+  
+  .card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+  
+  .card-text {
+    font-size: 1rem;
+    color: #666;
+  }
+  

@@ -1,0 +1,36 @@
+.toast-capsule {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin: 10px 0;
+  opacity: 0.9;
+  min-height: 5vh;
+  gap: 10px;
+
+  .toast-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 20px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    .toast-body-container {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
+  
+:host {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 100;
+}

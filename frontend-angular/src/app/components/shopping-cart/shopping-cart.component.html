@@ -1,0 +1,9 @@
+<div [classList]="shoppingCartOpened ? 'products opened' : 'products closed'">
+    <div class="product-item" *ngFor="let product of products">
+      <img src="{{product.image}}" alt="product-image" [hidden]="product.image == null">
+      <div class="product-information">
+        <h4>{{product.title}}</h4>
+        <span class="product-id">{{product.id}}</span>
+      </div>
+    </div>
+</div>

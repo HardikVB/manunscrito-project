@@ -1,0 +1,36 @@
+.home-page {
+  .banner {
+    background-image: url('/assets/images/banner.jpg');
+    background-size: cover;
+    padding: 4rem 0;
+    text-align: center;
+    color: white;
+    h2 {
+      font-size: 2rem;
+    }
+  }
+
+  .category-icons {
+    display: flex;
+    justify-content: space-around;
+    padding: 2rem 0;
+
+    .category-icon {
+      background-color: #e9ecef;
+      padding: 1rem;
+      border-radius: 50%;
+      width: 100px;
+      height: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  .item-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    padding: 2rem;
+  }
+}

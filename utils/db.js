@@ -1,26 +1,10 @@
 const { Sequelize, DataTypes } = require('sequelize');
-const mysql2 = require('mysql2');
-const fs = require('fs');
-const path = require('path');
-
-// Caminho para o certificado SSL
-const certPath = path.resolve(__dirname, '../certificate/ca.pem');
-
-// Configuração da base de dados
 const sequelize = new Sequelize(process.env.DATABASE, process.env.DATABASE_USER, process.env.DATABASE_PASSWORD, {
   host: process.env.DATABASE_HOST,
   port: process.env.DATABASE_PORT,
   dialect: 'mysql',
-  dialectModule: mysql2, // Usar o mysql2 em vez do mysql padrão
-  dialectOptions: {
-    ssl: {
-      ca: fs.readFileSync(certPath), // Lendo o certificado SSL
-    },
-  },
-  logging: false,
 });
 
-// Definição do modelo User
 const User = sequelize.define('User', {
   username: {
     type: DataTypes.STRING,
@@ -45,18 +29,62 @@ const User = sequelize.define('User', {
   timestamps: false,
 });
 
+// Definição do modelo Product
+const Product = sequelize.define('Product', {
+  title: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  image: {
+    type: DataTypes.TEXT, // Você pode armazenar a URL da imagem
+    allowNull: true,
+  },
+  price: {
+    type: DataTypes.FLOAT,
+    allowNull: false,
+  },
+  description: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+}, {
+  tableName: 'products',
+});
+
+// Definição do modelo Comment
+const Comment = sequelize.define('Comment', {
+  text: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+}, {
+  tableName: 'comments',
+});
+
+// Definição do modelo Review
+const Review = sequelize.define('Review', {
+  rating: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    validate: {
+      min: 1,
+      max: 5,
+    },
+  },
+}, {
+  tableName: 'reviews',
+});
+
+// Relacionamentos entre entidades
+Product.hasMany(Comment);
+Product.hasMany(Review);
+
 // Sincronização do modelo com a base de dados
 sequelize.sync();
 
-const findUserByEmail = async (Email) => {
-  return await User.findOne({ where: { Email } });
-};
-
-const addUser = async (username, email, password) => {
-  return await User.create({ username, email, password, privilege: "user" });
-};
-
 module.exports = {
-  findUserByEmail,
-  addUser,
+  Product,
+  Comment,
+  Review,
+  User
 };

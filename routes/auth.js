@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const { addUser } = require('../utils/db-functions');
-const bcrypt = require('bcrypt')
+const { authenticateToken, getUserToken } = require('../utils/auth');
+const { findUserByEmail } = require('../utils/db')
 
-router.post('/', async (req, res) => {
+router.post('/', authenticateToken, async (req, res) => {
     console.log(`[POST] Register`)
 
     const { username, password, email } = req.body;
@@ -18,7 +18,6 @@ router.post('/', async (req, res) => {
       res.status(201).send('Utilizador registado com sucesso!');
   
     } catch (error) {
-      console.log(error)
       res.status(500).send('Erro ao registar utilizador');
     }
 });

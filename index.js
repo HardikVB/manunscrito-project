@@ -2,29 +2,27 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const app = express();
+const cors = require('cors');
 
 require('dotenv').config()
 
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'public'));
-
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-const homeRoute = require('./routes/home');
 const loginRoute = require('./routes/login');
 const registerRoute = require('./routes/register');
 const storeRoute = require('./routes/store');
-const buyRoute = require('./routes/buy');
-const dashboardRoute = require('./routes/dashboard')
 
-app.use('/', homeRoute);
 app.use('/login', loginRoute);
-app.use('/register', registerRoute);
 app.use('/store', storeRoute);
-app.use('/buy', buyRoute);
-app.use('/dashboard', dashboardRoute);
+app.use('/register', registerRoute);
+
+// Rota padrão para servir o arquivo index.html
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/index.html'));
+});
 
 app.listen(process.env.PORT, () => {
   console.log(`Servidor a correr na porta ${process.env.PORT}`);
