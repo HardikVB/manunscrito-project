@@ -36,7 +36,7 @@ const Product = sequelize.define('Product', {
     allowNull: false,
   },
   image: {
-    type: DataTypes.TEXT, // Você pode armazenar a URL da imagem
+    type: DataTypes.STRING, // Você pode armazenar a URL da imagem
     allowNull: true,
   },
   price: {
@@ -44,7 +44,7 @@ const Product = sequelize.define('Product', {
     allowNull: false,
   },
   description: {
-    type: DataTypes.TEXT,
+    type: DataTypes.STRING,
     allowNull: false,
   },
 }, {
@@ -54,7 +54,7 @@ const Product = sequelize.define('Product', {
 // Definição do modelo Comment
 const Comment = sequelize.define('Comment', {
   text: {
-    type: DataTypes.TEXT,
+    type: DataTypes.STRING,
     allowNull: false,
   },
 }, {
