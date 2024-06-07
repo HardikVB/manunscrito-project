@@ -17,9 +17,15 @@ interface Product {
 
 export class ProductItemComponent {
   @Input() product: ShoppingProduct = new ShoppingProduct();
-  @Output() clickProduct: EventEmitter<EventEmitterItem> = new EventEmitter<EventEmitterItem>()
+  @Output() clickProduct: EventEmitter<EventEmitterItem> = new EventEmitter<EventEmitterItem>();
 
   clickedOnProduct(event: Event) {
-    this.clickProduct.emit({item: this.product, event: event});
+    // Exemplo de como você pode alterar isLoading para true durante o carregamento e para false após o carregamento
+    this.product.loading = true;
+    // Suponha que aqui você esteja fazendo alguma operação assíncrona, como carregar mais dados
+    setTimeout(() => {
+      this.clickProduct.emit({item: this.product, event: event});
+      this.product.loading = false;
+    }, 2000); // Supondo que a operação leve 2 segundos
   }
 }

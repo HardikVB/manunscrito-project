@@ -16,23 +16,41 @@ export class ToastComponent implements OnInit {
   ngOnInit(): void {
     this.toastService.getToasts().subscribe(async (toast: ToastModel) => {
       this.toasts.push(toast);
-
-      if(toast.asyncFunction != null) {
-        let response = await toast.asyncFunction()
-
-        if(response) {
+  
+      if (toast.asyncFunction != null) {
+        let response;
+        try {
+          // Defina um tempo limite para a resposta assíncrona
+          const timeout = 5000; // 5 segundos
+          const asyncPromise = toast.asyncFunction();
+  
+          // Aguarde a resposta ou lance um erro se estourar o tempo limite
+          response = await Promise.race([asyncPromise, this.createTimeoutPromise(timeout)]);
+        } catch (error) {
+          console.error("Ocorreu um erro durante a execução da função assíncrona:", error);
+          response = null; // Define a resposta como nula em caso de erro
+        }
+  
+        if (response !== null) {
           toast.type = ToastType.SUCCESS;
-          toast.message = "Feito com sucesso!"
+          toast.message = "Feito com sucesso!";
         } else {
           toast.type = ToastType.ERROR;
-          toast.message = "Ocorreu um erro"
+          toast.message = "Ocorreu um erro";
         }
       }
-      
-      setTimeout(() => this.removeToast(toast), toast.duration); 
+  
+      setTimeout(() => this.removeToast(toast), toast.duration);
     });
   }
-
+  
+  // Função para criar uma Promise de tempo limite
+  private createTimeoutPromise(timeout: number): Promise<null> {
+    return new Promise<null>((resolve) => {
+      setTimeout(() => resolve(null), timeout);
+    });
+  }
+  
   removeToast(toast: any): void {
     this.toasts = this.toasts.filter(t => t !== toast);
   }

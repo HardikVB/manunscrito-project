@@ -1,7 +1,8 @@
+<div class="card h-100 border rounded-3" [ngClass]="{ 'loading': product.loading }" (click)="clickedOnProduct($event)">
+    <div class="gradient-overlay" *ngIf="product.loading"></div>
 
-<div class="card h-100 border rounded-3" (click)="clickedOnProduct($event)">
-    <img [src]="product.image" class="card-img-top" alt="{{ product.title }}" [hidden]="!product.image">
-    <div class="card-body">
+    <img [src]="product.image" class="card-img-top" alt="{{ product.title }}" [hidden]="!product.image" *ngIf="!product.loading">
+    <div class="card-body" *ngIf="!product.loading">
         <h5 [classList]="!product.image ? 'card-title text-center': 'card-title'">{{ product.title }}</h5>
         <p [classList]="!product.image ? 'card-title text-center': 'card-title'">{{ product.description }}</p>
     </div>

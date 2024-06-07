@@ -1,5 +1,6 @@
 export class ShoppingProduct {
-    title!: string;
+    loading!: boolean
+    title?: string;
     id?: string;
     description?: string;
     image?: string;

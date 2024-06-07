@@ -1,36 +1,47 @@
 .card {
-    border-radius: 15px;
-    transition: box-shadow 0.3s ease;
-    min-height: 20vh;
-    display: flex;
+  border-radius: 15px;
+  transition: box-shadow 0.3s ease;
+  min-height: 30vh;
+  max-height: 30vh;
+  display: flex;
+  position: relative; // Adicione isso para permitir a sobreposição do gradiente
 
-    .card-body {
+  .card-body {
       display: flex;
       align-items: center;
       justify-content: center;
       flex-direction: column;
-    }
   }
-  
-  .card:hover {
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+
+  .gradient-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0) 100%);
+      z-index: 1; // Certifique-se de que o gradiente fique sobreposto à imagem
   }
-  
-  .card-img-top {
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-  }
-  
-  .card-body {
-    padding: 1.25rem;
-  }
-  
-  .card-title {
-    font-size: 1.25rem;
-  }
-  
-  .card-text {
-    font-size: 1rem;
-    color: #666;
-  }
-  
+}
+
+.card:hover {
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card-img-top {
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.card-body {
+  padding: 1.25rem;
+}
+
+.card-title {
+  font-size: 1.25rem;
+}
+
+.card-text {
+  font-size: 1rem;
+  color: #666;
+}

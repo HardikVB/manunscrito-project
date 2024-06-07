@@ -20,9 +20,9 @@ interface Product {
 
 
 export class PaginationComponent {
-    @Input() pageSize: number = 10;
+    @Input() pageSize: number = 12;
     @Input() currentPage: number = 1;
-    @Input() sizes: number[] = [5, 10, 20, 50];
+    @Input() sizes: number[] = [6, 12, 36, 72];
     @Output() clickProduct: EventEmitter<EventEmitterItem> = new EventEmitter<EventEmitterItem>()
     
     isGridView: boolean = true;
@@ -45,6 +45,8 @@ export class PaginationComponent {
     }
 
     async getProducts(): Promise<any> {
+        this.populateLoadingCards()
+
         try {
           const response = await this.httpClient.get<any>(`${environment.apiUrl}/store/products?page=${this.currentPage}&pageSize=${this.pageSize}`).toPromise();
           this.products = response.products;
@@ -81,5 +83,11 @@ export class PaginationComponent {
 
     calculateNumberPages() {
         return Math.ceil(this.totalProducts / this.pageSize)
+    }
+
+    populateLoadingCards() {
+        this.products = []
+        for(let i = 0; i < this.pageSize; i++)
+            this.products.push({loading: true})
     }
 }

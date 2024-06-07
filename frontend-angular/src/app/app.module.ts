@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './components/header/header.component';
 import { StorePage } from './pages/store-page/store-page.component';
 import { ToastService } from './service/toast.service';
@@ -23,6 +23,7 @@ import { PaginationComponent } from './components/pagination/pagination.componen
 import { CustomButtonComponent } from './components/button/custom-button.component';
 import { ToggleButtonComponent } from './components/toggle-button/toggle-button.component';
 import { ToastComponent } from './components/toast/toast.component';
+import { AuthInterceptor } from './service/auth-interceptor';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { ToastComponent } from './components/toast/toast.component';
     DragDropModule
   ],
   providers: [
-    ToastService
+    ToastService,
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true,}
   ],
   bootstrap: [AppComponent]
 })

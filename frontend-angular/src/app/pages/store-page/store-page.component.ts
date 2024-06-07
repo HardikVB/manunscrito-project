@@ -13,11 +13,10 @@ import { environment } from '../../../environments/environment';
 })
 export class StorePage implements OnInit {
   products: ShoppingProduct[] = [];
-  adminProductAdd: ShoppingProduct = { title: "Adicionar Produto" };
+  adminProductAdd: ShoppingProduct = { title: "Adicionar Produto", loading: false };
   token: string | null = null;
   isAdmin: boolean = false;
   modalOpen = false;
-  loading = true; // Variável de controle de carregamento
   currentPage = 1; // Página atual
   pageSize = 18; // Tamanho da página
   totalProducts = 0; // Total de produtos
@@ -31,25 +30,6 @@ export class StorePage implements OnInit {
   }
 
   ngOnInit(): void {
-    // Recuperar os produtos da loja do backend
-    this.fetchProducts();
-  }
-
-  // Método para buscar os produtos
-  fetchProducts(): void {
-
-    this.httpClient.get<any>(`${environment.apiUrl}/store/products?page=${this.currentPage}&pageSize=${this.currentPage == 1 ? this.pageSize - 1 : this.pageSize}`).subscribe(
-      response => {
-        this.products = response.products;
-        this.totalProducts = response.count;
-        this.loading = false; // Define loading como false após buscar os produtos
-      },
-      error => {
-        console.error('Error fetching products:', error);
-        this.loading = false; // Define loading como false em caso de erro
-        // Exibir uma mensagem de erro ao usuário, se necessário
-      }
-    );
   }
 
   // Método para adicionar um produto
@@ -88,26 +68,6 @@ export class StorePage implements OnInit {
     } catch (error) {
       console.error('Error saving product:', error);
       this.toastService.showErrorToast("Ocorreu um erro ao fazer a ação");
-    }
-  }
-
-  calculateNumberPages() {
-    return Math.ceil(this.totalProducts / this.pageSize)
-  }
-
-  // Método para navegar para a próxima página
-  nextPage(): void {
-    if (this.currentPage * this.pageSize < this.totalProducts) {
-      this.currentPage++;
-      this.fetchProducts();
-    }
-  }
-
-  // Método para navegar para a página anterior
-  previousPage(): void {
-    if (this.currentPage > 1) {
-      this.currentPage--;
-      this.fetchProducts();
     }
   }
 }

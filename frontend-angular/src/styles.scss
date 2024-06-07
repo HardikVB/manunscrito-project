@@ -57,3 +57,28 @@ span {
   font-size: 15px;
   width: 100%;
 }
+
+
+@keyframes placeHolderShimmer {
+  0% {
+    background-position: -30vw 0
+  }
+  100% {
+    background-position: 70vw 0
+  }
+}
+
+.card.loading {
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: placeHolderShimmer;
+  animation-timing-function: linear;
+  background: fff;
+  background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+  height: 100%;
+  width: 100%;
+  position: relative;
+  padding-top: 50px;
+  pointer-events: none;
+}
