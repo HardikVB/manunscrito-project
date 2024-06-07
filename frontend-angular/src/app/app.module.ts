@@ -16,6 +16,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { ShoppingCart } from './components/shopping-cart/shopping-cart.component';
 import { CommonModule } from '@angular/common';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { DragableContainerComponent } from './components/dragable-container/draggable-container.component';
+import { DropdownComponent } from './components/dropdown/dropdown.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
+import { CustomButtonComponent } from './components/button/custom-button.component';
+import { ToggleButtonComponent } from './components/toggle-button/toggle-button.component';
+import { ToastComponent } from './components/toast/toast.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +33,12 @@ import { CommonModule } from '@angular/common';
     ModalProductComponent,
     CarouselComponent,
     ShoppingCart,
+    DragableContainerComponent,
+    DropdownComponent,
+    PaginationComponent,
+    CustomButtonComponent,
+    ToggleButtonComponent,
+    ToastComponent,
     HomePage,
     StorePage,
     LogoutPage,
@@ -37,7 +50,8 @@ import { CommonModule } from '@angular/common';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DragDropModule
   ],
   providers: [
     ToastService

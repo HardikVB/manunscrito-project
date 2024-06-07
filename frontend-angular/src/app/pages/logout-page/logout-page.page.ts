@@ -15,7 +15,7 @@ export class LogoutPage implements OnInit {
     // Remover o token de acesso do localStorage
     localStorage.removeItem('accessToken');
 
-    this.toastService.showToast("Desconectado com sucesso!", undefined, undefined, ToastType.INFORMATION)
+    this.toastService.showSuccessToast("Desconectado com sucesso!")
 
     // Redirecionar para a página inicial
     this.router.navigate(['/']);

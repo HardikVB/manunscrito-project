@@ -1,0 +1,49 @@
+.pagination {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.grid-view {
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+.list-view {
+    margin-top: 12px;
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+
+.list-view .row:hover {
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+}
+
+.list-view .row {
+    max-height: 10vh;
+    border: 1px solid rgba(0, 0, 0, 0.175);
+    border-radius: 15px;
+    display: flex;
+    align-content: center;
+    cursor: pointer;
+    transition: 1s;
+  }
+  
+  .list-view .row .col {
+    max-height: inherit;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+  }
+  
+  .list-view .row .col img {
+    width: auto;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 1 / 1;
+    border-radius: 15px;
+  }
+  

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastService } from '../../service/toast.service';
-import { ToastModel } from '../../models/toast.model';
+import { ToastModel, ToastType } from '../../models/toast.model';
 
 @Component({
   selector: 'app-toast',
@@ -9,13 +9,27 @@ import { ToastModel } from '../../models/toast.model';
 })
 export class ToastComponent implements OnInit {
   toasts: ToastModel[] = [];
+  allRoleTypes = ToastType;
 
   constructor(private toastService: ToastService) {}
 
   ngOnInit(): void {
-    this.toastService.getToasts().subscribe((toast: ToastModel) => {
+    this.toastService.getToasts().subscribe(async (toast: ToastModel) => {
       this.toasts.push(toast);
-      setTimeout(() => this.removeToast(toast), toast.duration);
+
+      if(toast.asyncFunction != null) {
+        let response = await toast.asyncFunction()
+
+        if(response) {
+          toast.type = ToastType.SUCCESS;
+          toast.message = "Feito com sucesso!"
+        } else {
+          toast.type = ToastType.ERROR;
+          toast.message = "Ocorreu um erro"
+        }
+      }
+      
+      setTimeout(() => this.removeToast(toast), toast.duration); 
     });
   }
 

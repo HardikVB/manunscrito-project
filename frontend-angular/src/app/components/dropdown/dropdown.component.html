@@ -1,0 +1,13 @@
+<div class="dropdown">
+    <div class="dropdown-label" *ngIf="label">{{label}}</div>
+    <div class="selected-option" (click)="toggleDropdown()">
+      {{ selectedOption ? selectedOption : 'Selecione uma opção' }}
+      <i class="arrow-icon fas fa-chevron-down"></i>
+    </div>
+    <div class="options" *ngIf="isDropdownOpen">
+      <div class="option" *ngFor="let option of options" (click)="selectOption(option)">
+        {{ option }}
+      </div>
+    </div>
+  </div>
+  

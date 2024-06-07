@@ -1,0 +1,3 @@
+<div class="option" *ngFor="let option of options" [ngClass]="{ 'selected': option === activeOption }" (click)="toggle(option)">
+    <i [ngClass]="option.icon"></i>
+</div>

@@ -1,0 +1,28 @@
+.scroll-container {
+    overflow-x: auto;
+    white-space: nowrap;
+    cursor: grab;
+    user-select: none;
+  }
+  
+  .card-container {
+    display: inline-flex;
+    user-select: none;
+  }
+  
+  .card {
+    display: inline-block;
+    width: 18rem;
+    margin-right: 1rem;
+  }
+  
+  /* Desativa a seleção de texto durante o drag */
+  .card:active {
+    user-select: none;
+  }
+  
+  /* Estilo para o cursor de "drag" */
+  .scroll-container:active {
+    cursor: grabbing;
+  }
+  

@@ -46,3 +46,21 @@
 .pagination span {
   font-size: 14px;
 }
+
+/* Estilo para o contêiner dos produtos */
+.products-container {
+  display: flex;
+  flex-wrap: wrap; /* Permitir que os produtos ocupem várias linhas */
+  gap: 20px; /* Espaçamento entre os produtos */
+}
+
+/* Estilo para a visualização de lista */
+.list-view .products-container {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Estilo para cada item na visualização de lista */
+.list-view .product-item {
+  /* Adicione estilos apropriados para exibição em lista */
+}

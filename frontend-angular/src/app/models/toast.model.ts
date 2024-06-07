@@ -2,11 +2,13 @@ export class ToastModel {
     message!: string;
     title?: string;
     type?: ToastType = ToastType.INFORMATION;
-    duration?: number = 3000;
+    duration?: number;
+    asyncFunction?: () => Promise<any>;
 }
 
 export enum ToastType {
-    SUCCESS,
-    ERROR,
-    INFORMATION
+    SUCCESS = "success",
+    ERROR = "error",
+    INFORMATION = "information",
+    LOADING = "loading"
 }

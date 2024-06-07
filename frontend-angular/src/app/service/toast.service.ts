@@ -8,11 +8,32 @@ import { ToastModel, ToastType } from '../models/toast.model';
 export class ToastService {
   private toastSubject = new Subject<ToastModel>();
 
+  constructor() { }
+
   getToasts() {
     return this.toastSubject.asObservable();
   }
 
-  showToast(message: string, title?: string, duration?: number, type?: ToastType) {
-    this.toastSubject.next({ message, duration, title, type});
+  // Método para mostrar um toast de carregamento
+  showLoadingToast(message: string, asyncFunction: () => Promise<any>, duration: number = 3000, title?: string): void {
+    const toast: ToastModel = {
+      message,
+      title,
+      duration,
+      type: ToastType.LOADING,
+      asyncFunction // Passa a função assíncrona
+    };
+
+    this.toastSubject.next(toast);
+  }
+
+  // Método para mostrar um toast de sucesso
+  showSuccessToast(message: string, duration: number = 3000, title?: string)  {
+    this.toastSubject.next({ message, title, duration, type: ToastType.SUCCESS });
+  }
+
+  // Método para mostrar um toast de erro
+  showErrorToast(message: string, duration: number = 3000000, title?: string)  {
+    this.toastSubject.next({ message, title, duration, type: ToastType.ERROR });
   }
 }

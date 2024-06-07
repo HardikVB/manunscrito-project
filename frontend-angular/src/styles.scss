@@ -1,3 +1,59 @@
 a {
   cursor: pointer;
 }
+
+.w-fit-content {
+  width: fit-content;
+  max-width: fit-content;
+  min-width: fit-content;
+}
+
+.card {
+  cursor: pointer;
+
+  .card-img-top {
+    max-height: 15vh !important;
+    min-height: 15vh !important;
+    object-fit: cover;
+  }
+  
+  .card-body {
+    max-height: 15vh;
+    min-height: 15vh;
+    overflow: hidden; /* esconde qualquer conteúdo que exceda o espaço disponível */
+    text-overflow: ellipsis; /* adiciona reticências (...) ao final do texto cortado */
+    white-space: nowrap; /* impede que o texto seja quebrado em várias linhas */
+
+    h5 {
+      overflow: hidden; /* esconde qualquer conteúdo que exceda o espaço disponível */
+      text-overflow: ellipsis; /* adiciona reticências (...) ao final do texto cortado */
+      white-space: nowrap; /* impede que o texto seja quebrado em várias linhas */
+      font-size: 16px;
+      width: 100%;
+    }
+
+    p {
+      overflow: hidden; /* esconde qualquer conteúdo que exceda o espaço disponível */
+      text-overflow: ellipsis; /* adiciona reticências (...) ao final do texto cortado */
+      white-space: nowrap; /* impede que o texto seja quebrado em várias linhas */
+      font-size: 15px;
+      width: 100%;
+    }
+  }
+}
+
+.pb-12 {
+  padding-bottom: 12px;
+}
+
+.pt-12 {
+  padding-top: 12px;
+}
+
+span {
+  overflow: hidden; /* esconde qualquer conteúdo que exceda o espaço disponível */
+  text-overflow: ellipsis; /* adiciona reticências (...) ao final do texto cortado */
+  white-space: nowrap; /* impede que o texto seja quebrado em várias linhas */
+  font-size: 15px;
+  width: 100%;
+}
