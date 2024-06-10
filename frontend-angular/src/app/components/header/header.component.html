@@ -3,7 +3,7 @@
       <a class="navbar-brand" href="/">
         <img src="assets/logo.png" alt="Logo" class="logo-img">
       </a>
-      <!-- Adicione um botão de toggler personalizado -->
+      
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -25,7 +25,10 @@
             <div class="login-shopping-container">
               <a class="nav-link" href="/dashboard" [hidden]="!isAdmin"><i class="fas fa-tachometer-alt"></i></a>
               <a class="nav-link" href="/login" [hidden]="token != null"><i class="fas fa-user"></i></a>
-              <a class="nav-link" (click)="openShoppingCart()" (click)="$event.stopPropagation()"><i class="fas fa-shopping-cart"></i></a>        
+              <a class="nav-link" (click)="openShoppingCart()" (click)="$event.stopPropagation()">
+                <i class="fas fa-shopping-cart"></i>
+                <div class="shopping-indicator">{{shoppingProducts.length}}</div>
+              </a>        
               <a class="nav-link" href="/logout" [hidden]="token == null"><i class="fas fa-sign-out-alt"></i></a>  
             </div>
           </li>
@@ -33,5 +36,5 @@
       </div>
     </nav>
 
-    <shopping-cart [shoppingCartOpened]="shoppingCartOpened" (clickedOutsideShoppingCart)="shoppingCartOpened = !shoppingCartOpened"></shopping-cart>
+    <shopping-cart [shoppingCartOpened]="shoppingCartOpened" [products]="shoppingProducts" (clickedOutsideShoppingCart)="shoppingCartOpened = !shoppingCartOpened"></shopping-cart>
 </header>

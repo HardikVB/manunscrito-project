@@ -42,3 +42,17 @@
 .toast.loading {
   background-color: #ffffff;
 }
+
+.toast-inside-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.ml-auto.close {
+  height: 100%;
+  width: 100%;
+  border: none;
+  background-color: transparent;
+}

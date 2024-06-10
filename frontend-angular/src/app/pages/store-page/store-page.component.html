@@ -1,14 +1,19 @@
 <app-header></app-header>
-
 <div class="store-container">
   <div class="row w-100">
     <div class="col-3">
       Filtro
     </div>
     <div class="col-9">
-      <pagination></pagination>
+      <pagination 
+      [isAdmin]="isAdmin" 
+      (clickEditProduct)="productModal($event)" 
+      (clickRemoveProduct)="productRemoveModal($event)"
+      (clickAddProduct)="productModal($event)"
+      (clickAddProductToCart)="addProductShoppingCart($event)"></pagination>
     </div>
   </div>
 </div>
 
-<modal [hidden]="!modalOpen" (clickBackground)="modalOpen = !modalOpen" (saveProductClick)="saveProduct($event)"></modal>
+<modal-confirm-removal [hidden]="!modalRemoveProductShow" (closeModal)="modalRemoveProductShow = !modalRemoveProductShow" (confirmRemove)="removeProduct()"></modal-confirm-removal>
+<modal-edit-product [hidden]="!modalProductShow" [product]="selectedProduct" (clickBackground)="modalProductShow = !modalProductShow" [title]="modalProductTitle" (saveProductClick)="saveProduct($event)"></modal-edit-product>

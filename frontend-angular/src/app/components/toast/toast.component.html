@@ -1,14 +1,23 @@
 <div *ngIf="toasts.length > 0" class="toast-container">
   <div *ngFor="let toast of toasts" class="toast show" [ngClass]="{ 'success': toast.type === allRoleTypes.SUCCESS, 'error': toast.type === allRoleTypes.ERROR, 'loading': toast.type === allRoleTypes.LOADING }">
-    <div class="toast-header" *ngIf="toast.title">{{ toast.title }}</div>
-    <div class="toast-body">
-      <div *ngIf="toast.type === allRoleTypes.LOADING">
-        <i class="fas fa-spinner fa-spin"></i> <!-- Ícone de carregamento -->
+    <div class="toast-header" *ngIf="toast.title">
+      {{ toast.title }}
+    </div>
+    <div class="toast-inside-container">
+      <div class="toast-body">
+        <div *ngIf="toast.type === allRoleTypes.LOADING">
+          <i class="fas fa-spinner fa-spin"></i> <!-- Ícone de carregamento -->
+        </div>
+        <div *ngIf="toast.type !== allRoleTypes.LOADING">
+          <i [ngClass]="toast.type === allRoleTypes.SUCCESS ? 'fas fa-check-circle' : 'fas fa-times-circle'"></i> <!-- Ícone de sucesso ou falha -->
+        </div>
+        {{ toast.message }}
       </div>
-      <div *ngIf="toast.type !== allRoleTypes.LOADING">
-        <i [ngClass]="toast.type === allRoleTypes.SUCCESS ? 'fas fa-check-circle' : 'fas fa-times-circle'"></i> <!-- Ícone de sucesso ou falha -->
+      <div class="toast-body">
+        <button type="button" class="ml-auto close" (click)="removeToast(toast)">
+          <span>&times;</span>
+        </button>
       </div>
-      {{ toast.message }}
     </div>
   </div>
 </div>

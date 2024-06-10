@@ -2,7 +2,6 @@
   border-radius: 15px;
   transition: box-shadow 0.3s ease;
   min-height: 30vh;
-  max-height: 30vh;
   display: flex;
   position: relative; // Adicione isso para permitir a sobreposição do gradiente
 
@@ -44,4 +43,17 @@
 .card-text {
   font-size: 1rem;
   color: #666;
+}
+
+.btn {
+  width: 100%;
+  font-size: 12px;
+}
+
+.add-product-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  word-wrap: break-word;
+  font-size: 10px;
 }

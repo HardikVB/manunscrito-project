@@ -1,5 +1,5 @@
 export class ShoppingProduct {
-    loading!: boolean
+    loading: boolean = true;
     title?: string;
     id?: string;
     description?: string;

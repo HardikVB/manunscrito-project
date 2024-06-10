@@ -1,0 +1,28 @@
+:host {
+    border: 1px solid #ccc;
+    border-radius: 15px;
+}
+
+.row {
+    max-height: 10vh;
+    display: flex;
+    align-content: center;
+    cursor: pointer;
+    transition: 1s;
+    margin: 0;
+    margin: 10px;
+}
+
+.row .col {
+    max-height: inherit;
+    align-items: center;
+    justify-content: center;
+}
+
+.row .col img {
+    height: 100%; /* Define a altura para ocupar toda a altura da coluna */
+    width: 100%; /* Define a largura para ocupar toda a largura da coluna */
+    object-fit: cover;
+    aspect-ratio: 1 / 1;
+    border-radius: 15px;
+}

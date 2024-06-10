@@ -9,14 +9,16 @@ header {
     height: 40px;
 }
 
-.navbar {
-    min-height: 10vh;
-}
-
 .navbar-nav {
     gap: 20px;
     align-items: center;
     min-height: 35px;
+}
+
+.navbar-brand {
+    min-height: 10vh;
+    display: flex;
+    align-items: center;
 }
 
 .login-shopping-container {
@@ -40,4 +42,21 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+
+    .shopping-indicator {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        background-color: #BC6C25;
+        color: white;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 5px;
+    }
 }

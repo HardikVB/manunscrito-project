@@ -18,7 +18,6 @@ a {
   }
   
   .card-body {
-    max-height: 15vh;
     min-height: 15vh;
     overflow: hidden; /* esconde qualquer conteúdo que exceda o espaço disponível */
     text-overflow: ellipsis; /* adiciona reticências (...) ao final do texto cortado */

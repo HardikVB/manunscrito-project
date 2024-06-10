@@ -2,8 +2,29 @@
     <div class="gradient-overlay" *ngIf="product.loading"></div>
 
     <img [src]="product.image" class="card-img-top" alt="{{ product.title }}" [hidden]="!product.image" *ngIf="!product.loading">
+    
     <div class="card-body" *ngIf="!product.loading">
-        <h5 [classList]="!product.image ? 'card-title text-center': 'card-title'">{{ product.title }}</h5>
-        <p [classList]="!product.image ? 'card-title text-center': 'card-title'">{{ product.description }}</p>
+        <h5 [classList]="!product.image ? 'card-title text-center': 'card-title'" *ngIf="product.title != null">{{ product.title }}</h5>
+        <p [classList]="!product.image ? 'card-title text-center': 'card-title'" *ngIf="product.description != null">{{ product.description }}</p>
+        
+        <div class="add-product-text" *ngIf="isAdmin && product.id == null">
+            <h4 class="text-center">Adicionar <br /> Produto</h4>
+        </div>
+
+        <div class="d-flex w-100" *ngIf="product.id != null">
+            <button class="btn btn-primary" (click)="addToCart($event)">
+                <i class="fas fa-shopping-cart"></i>
+            </button>
+        </div>
+
+        <div class="d-flex w-100 mt-2 gap-2" *ngIf="isAdmin && product.id != null">
+            <button class="btn btn-warning mr-2" (click)="editProduct($event)">
+                <i class="fas fa-edit"></i>
+            </button>
+            <button class="btn btn-danger" (click)="removeProduct($event)">
+                <i class="fas fa-remove"></i>
+            </button>
+        </div>
+        
     </div>
 </div>

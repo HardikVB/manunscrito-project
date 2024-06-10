@@ -8,7 +8,7 @@ import { JwtService } from "../../service/jwt";
     styleUrls: ['./shopping-cart.component.scss']
   })
   export class ShoppingCart {
-    products: ShoppingProduct[] = []
+    @Input() products: ShoppingProduct[] = []
     @Input() shoppingCartOpened: boolean = false;
     @Output() clickedOutsideShoppingCart: EventEmitter<Event> = new EventEmitter<Event>()
 

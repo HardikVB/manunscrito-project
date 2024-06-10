@@ -24,6 +24,9 @@ import { CustomButtonComponent } from './components/button/custom-button.compone
 import { ToggleButtonComponent } from './components/toggle-button/toggle-button.component';
 import { ToastComponent } from './components/toast/toast.component';
 import { AuthInterceptor } from './service/auth-interceptor';
+import { ShoppingService } from './service/shopping.service';
+import { ConfirmRemoveModalComponent } from './components/modal-confirm-removal/modal-confirm-removal.component';
+import { ProductRowComponent } from './components/product-row/product-row.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +43,8 @@ import { AuthInterceptor } from './service/auth-interceptor';
     CustomButtonComponent,
     ToggleButtonComponent,
     ToastComponent,
+    ConfirmRemoveModalComponent,
+    ProductRowComponent,
     HomePage,
     StorePage,
     LogoutPage,
@@ -56,7 +61,8 @@ import { AuthInterceptor } from './service/auth-interceptor';
   ],
   providers: [
     ToastService,
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true,}
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true,},
+    ShoppingService
   ],
   bootstrap: [AppComponent]
 })

@@ -33,7 +33,9 @@ export class ToastComponent implements OnInit {
   
         if (response !== null) {
           toast.type = ToastType.SUCCESS;
-          toast.message = "Feito com sucesso!";
+          
+          toast.message = toast.endingMessage || "Feito com sucesso!";
+
         } else {
           toast.type = ToastType.ERROR;
           toast.message = "Ocorreu um erro";
@@ -51,7 +53,7 @@ export class ToastComponent implements OnInit {
     });
   }
   
-  removeToast(toast: any): void {
+  removeToast(toast: ToastModel): void {
     this.toasts = this.toasts.filter(t => t !== toast);
   }
 }
