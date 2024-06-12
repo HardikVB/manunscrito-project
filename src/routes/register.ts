@@ -16,14 +16,16 @@ router.post('/', async (req: Request, res: Response) => {
 
     user.password = hashedPassword;
 
+    user.privilege = "normal"
+
     // Adicionar o usuário com a senha criptografada ao banco de dados
     await User.create(user);
 
-    res.status(201).send('Utilizador registado com sucesso!');
+    res.status(201).send({message: 'Utilizador registado com sucesso!'});
 
   } catch (error) {
     console.log(error);
-    res.status(500).send('Erro ao registar utilizador');
+    res.status(500).send({message: 'Utilizador registado com sucesso!'});
   }
 });
 

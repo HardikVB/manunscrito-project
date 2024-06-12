@@ -31,6 +31,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AuthService } from './service/auth.service';
 import { NotFoundPage } from './pages/not-found-page/note-found-page.component';
+import { RegisterPage } from './pages/register-page/register-page.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, '/assets/i18n/', '.json');
@@ -57,7 +58,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     StorePage,
     LogoutPage,
     LoginPage,
-    NotFoundPage
+    NotFoundPage,
+    RegisterPage
   ],
   imports: [
     CommonModule,

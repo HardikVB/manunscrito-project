@@ -9,11 +9,12 @@ export class LanguageGuard implements CanActivate {
 
   constructor(private router: Router) {}
 
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+
     const language = route.paramMap.get('language');
+
     const validLanguages = ['en', 'pt', 'es']; // Adicione aqui os idiomas válidos
+
     if(language == null) {
         return this.router.createUrlTree(['/pt/404-not-found']); // ou para outra rota padrão
     }
