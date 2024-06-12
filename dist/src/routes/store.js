@@ -17,26 +17,31 @@ const express_1 = __importDefault(require("express"));
 const product_image_db_1 = require("../db/product-image-db");
 const product_translate_db_1 = require("../db/product-translate-db");
 const db_1 = require("../utils/db");
-const auth_1 = __importDefault(require("../utils/auth"));
+const auth_1 = require("../utils/auth");
 const router = express_1.default.Router();
 exports.router = router;
-// Middleware to log the language parameter
-router.use((req, res, next) => {
-    next();
-});
 // Rota para obter produtos com paginação
 // Rota para obter produtos com paginação
 router.get('/products', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const page = parseInt(req.query.page) || 1;
     const pageSize = parseInt(req.query.pageSize) || 10;
+    const language = req.language;
     try {
         // Consulta para obter os produtos com suas traduções no idioma especificado
         const { count, rows } = yield db_1.Product.findAndCountAll({
             limit: pageSize,
             offset: (page - 1) * pageSize,
-            include: [{ model: product_translate_db_1.ProductTranslation, required: false }, { model: product_image_db_1.ProductImage, required: false }],
+            include: [
+                { model: product_translate_db_1.ProductTranslation, required: false, as: 'translations', where: { language: language } },
+                { model: product_image_db_1.ProductImage, required: false, as: 'images' }
+            ],
         });
-        res.json({ count, rows });
+        let products = [];
+        rows.forEach((product) => {
+            const translation = product.translations.find((translation) => translation.language == req.language) || new product_translate_db_1.ProductTranslation();
+            products.push({ id: product.id, translation: translation, images: product.images, image_thumbnail: product.image_thumbnail, price: product.price });
+        });
+        res.json({ count, products: products });
     }
     catch (error) {
         console.error('Error fetching products:', error);
@@ -44,21 +49,30 @@ router.get('/products', (req, res) => __awaiter(void 0, void 0, void 0, function
     }
 }));
 // Rota para adicionar um novo produto
-router.post('/add', auth_1.default.verifyAdminPrivilage, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.post('/add', auth_1.verifyAdminPrivilage, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const request = req.body;
     try {
         // Criação do produto
         const product = yield db_1.Product.create(request);
-        // Criação das imagens do produto
-        yield Promise.all(request.images.map((image) => __awaiter(void 0, void 0, void 0, function* () {
-            image.productId = product.id;
-            yield product_image_db_1.ProductImage.create(image);
-        })));
-        // Criação das traduções do produto
-        yield Promise.all(request.translations.map((languageObj) => __awaiter(void 0, void 0, void 0, function* () {
-            languageObj.productId = product.id;
-            yield product_translate_db_1.ProductTranslation.create(languageObj);
-        })));
+        if (request.images) {
+            // Criação das imagens do produto
+            yield Promise.all(request.images.map((image) => __awaiter(void 0, void 0, void 0, function* () {
+                image.productId = product.id;
+                yield product_image_db_1.ProductImage.create(image);
+            })));
+        }
+        if (request.translations) {
+            // Criação das traduções do produto
+            yield Promise.all(request.translations.map((languageObj) => __awaiter(void 0, void 0, void 0, function* () {
+                languageObj.productId = product.id;
+                yield product_translate_db_1.ProductTranslation.create(languageObj);
+            })));
+        }
+        if (request.translation) {
+            request.translation.language = req.language || 'pt';
+            request.translation.productId = product.id;
+            yield product_translate_db_1.ProductTranslation.create(request.translation);
+        }
         res.json(product);
     }
     catch (error) {
@@ -67,7 +81,8 @@ router.post('/add', auth_1.default.verifyAdminPrivilage, (req, res) => __awaiter
     }
 }));
 // Rota para editar um produto existente por ID
-router.put('/edit/:id', auth_1.default.verifyAdminPrivilage, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.put('/edit/:id', auth_1.verifyAdminPrivilage, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log(req.params);
     const productId = req.params.id;
     let updateProduct = req.body;
     try {
@@ -84,10 +99,29 @@ router.put('/edit/:id', auth_1.default.verifyAdminPrivilage, (req, res) => __awa
         }
         // Atualiza as imagens do produto, se fornecidas
         if (updateProduct.images && updateProduct.images.length > 0) {
-            let images = product_image_db_1.ProductImage.findAll({ where: { productId: product.id } });
+            yield Promise.all(updateProduct.images.map((image) => __awaiter(void 0, void 0, void 0, function* () {
+                product_image_db_1.ProductImage.destroy({ where: { productId: product.id } });
+                image.productId = product.id;
+                yield product_image_db_1.ProductImage.create(image);
+            })));
         }
         // Atualiza as traduções do produto, se fornecidas
         if (updateProduct.translations) {
+            yield Promise.all(updateProduct.translations.map((translation) => __awaiter(void 0, void 0, void 0, function* () {
+                product_translate_db_1.ProductTranslation.destroy({ where: { productId: product.id } });
+                translation.productId = product.id;
+                yield product_translate_db_1.ProductTranslation.create(translation);
+            })));
+        }
+        if (updateProduct.translation) {
+            let translation = yield product_translate_db_1.ProductTranslation.findOne({ where: { language: updateProduct.translation.language, productId: product.id } });
+            updateProduct.translation.productId = product.id;
+            if (!translation)
+                return yield product_translate_db_1.ProductTranslation.create(updateProduct.translation);
+            translation.title = updateProduct.translation.title;
+            translation.description = updateProduct.translation.description;
+            translation.description_thumbnail = updateProduct.translation.description_thumbnail;
+            translation.save();
         }
         res.json(product);
     }
@@ -97,14 +131,14 @@ router.put('/edit/:id', auth_1.default.verifyAdminPrivilage, (req, res) => __awa
     }
 }));
 // Rota para deletar um produto
-router.delete('/:id', auth_1.default.verifyAdminPrivilage, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.delete('/:id', auth_1.verifyAdminPrivilage, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const productId = req.params.id;
     try {
-        const product = yield db_1.Product.findByPk(productId);
+        const product = yield db_1.Product.findOne({ where: { id: productId } });
         if (!product) {
             return res.status(404).json({ error: 'Product not found' });
         }
-        yield product.destroy();
+        yield db_1.Product.destroy({ where: { id: productId } });
         res.json({ message: 'Product deleted successfully' });
     }
     catch (error) {

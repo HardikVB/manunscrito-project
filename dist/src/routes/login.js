@@ -15,15 +15,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.router = void 0;
 const express_1 = __importDefault(require("express"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
+const db_functions_1 = require("../utils/db-functions");
 const router = express_1.default.Router();
 exports.router = router;
 const { generateAccessToken } = require('../utils/auth');
-const dbFunctions = require('../utils/db-functions');
 router.post('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log(`[POST] Login`);
     let userRequest = req.body;
     try {
-        const user = yield dbFunctions.findUserByEmail(userRequest.email);
+        const user = yield (0, db_functions_1.findUserByEmail)(userRequest.email);
         if (user == null) {
             return res.status(400).send('Nome de utilizador ou palavra-passe incorretos');
         }

@@ -25,12 +25,13 @@ router.post('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         // Gerar o hash da senha usando bcrypt
         const hashedPassword = yield bcrypt_1.default.hash(user.password, 10);
         user.password = hashedPassword;
+        user.privilege = "normal";
         // Adicionar o usuário com a senha criptografada ao banco de dados
         yield user_db_1.User.create(user);
-        res.status(201).send('Utilizador registado com sucesso!');
+        res.status(201).send({ message: 'Utilizador registado com sucesso!' });
     }
     catch (error) {
         console.log(error);
-        res.status(500).send('Erro ao registar utilizador');
+        res.status(500).send({ message: 'Utilizador registado com sucesso!' });
     }
 }));

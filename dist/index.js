@@ -7,8 +7,6 @@ const cors = require('cors');
 const store_1 = require("./src/routes/store");
 const login_1 = require("./src/routes/login");
 const register_1 = require("./src/routes/register");
-const dotenv_1 = require("dotenv");
-(0, dotenv_1.configDotenv)();
 const app = express();
 // Increase the request body size limit
 app.use(bodyParser.json({ limit: '50mb' }));
@@ -18,6 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 // Middleware to extract language parameter and pass it to the request
 app.use('/:language', (req, res, next) => {
+    req.language = req.params.language;
     next();
 });
 app.use('/:language/login', login_1.router);
