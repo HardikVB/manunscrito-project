@@ -39,8 +39,8 @@ app.get('*', (req: Request, res: Response) => {
 
 // HTTPS server configuration
 const httpsOptions = {
-  key: fs.readFileSync('caminho/para/server.key'),
-  cert: fs.readFileSync('caminho/para/server.cert')
+  key: fs.readFileSync('./certificate/server.key'),
+  cert: fs.readFileSync('./certificate/server.cert')
 };
 
 const httpsPort = 443;
