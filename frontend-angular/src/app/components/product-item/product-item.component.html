@@ -1,21 +1,21 @@
 <div class="card h-100 border rounded-3" [ngClass]="{ 'loading': product.loading }" (click)="clickedOnProduct($event)">
     <div class="gradient-overlay" *ngIf="product.loading"></div>
 
-    <img [src]="product.image" class="card-img-top" alt="{{ product.title }}" [hidden]="!product.image" *ngIf="!product.loading">
+    <div class="img-container" *ngIf="!product.loading && product.image_thumbnail">
+        <img [src]="product.image_thumbnail" class="card-img-top" alt="{{ product.translation.title }}">
+    </div>
     
     <div class="card-body" *ngIf="!product.loading">
-        <h5 [classList]="!product.image ? 'card-title text-center': 'card-title'" *ngIf="product.title != null">{{ product.title }}</h5>
-        <p [classList]="!product.image ? 'card-title text-center': 'card-title'" *ngIf="product.description != null">{{ product.description }}</p>
+        <h2 [classList]="!product.image_thumbnail ? 'card-title text-center': 'card-title'" *ngIf="product.translation.title != null">{{ product.translation.title || "N/A" }}</h2>
+        <p [classList]="!product.image_thumbnail ? 'card-title text-center': 'card-title'" *ngIf="product.translation.description_thumbnail != null">{{ product.translation.description_thumbnail || "N/A" }}</p>  
         
-        <div class="add-product-text" *ngIf="isAdmin && product.id == null">
+        <div class="add-product-text" *ngIf="isAdmin && !product.id && !product.loading ">
             <h4 class="text-center">Adicionar <br /> Produto</h4>
         </div>
+    </div>
 
-        <div class="d-flex w-100" *ngIf="product.id != null">
-            <button class="btn btn-primary" (click)="addToCart($event)">
-                <i class="fas fa-shopping-cart"></i>
-            </button>
-        </div>
+    <div class="card-footer">
+        <h1 class="price-show" *ngIf="product.price">{{product.price}}€</h1>
 
         <div class="d-flex w-100 mt-2 gap-2" *ngIf="isAdmin && product.id != null">
             <button class="btn btn-warning mr-2" (click)="editProduct($event)">
@@ -25,6 +25,5 @@
                 <i class="fas fa-remove"></i>
             </button>
         </div>
-        
-    </div>
+    </div>  
 </div>

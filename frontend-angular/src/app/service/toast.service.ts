@@ -15,7 +15,7 @@ export class ToastService {
   }
 
   // Método para mostrar um toast de carregamento
-  showLoadingToast(message: string, asyncFunction: () => Promise<any>, endingMessage?: string, duration: number = 3000, title?: string): void {
+  showLoadingToast(message: string, endingMessage: string, asyncFunction: () => Promise<any>, duration: number = 3000, title?: string): void {
     const toast: ToastModel = {
       message,
       title,

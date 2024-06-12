@@ -1,6 +1,6 @@
 // modal.component.ts
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ShoppingProduct } from '../../models/shopping-product.model';
+import { Product } from '../../models/product.model';
 
 @Component({
   selector: 'modal-edit-product',
@@ -14,12 +14,13 @@ import { ShoppingProduct } from '../../models/shopping-product.model';
             <div class="modal-body">
                 <form (ngSubmit)="saveProduct()">
                     <div class="form-group">
+                        <img *ngIf="product.image_thumbnail" [src]="product.image_thumbnail" class="preview-image">
                         <label for="title">Título:</label>
-                        <input type="text" class="form-control" id="title" name="title" required [(ngModel)]="product.title">
+                        <input type="text" class="form-control" id="title" name="title" required [(ngModel)]="product.translation.title">
                     </div>
                     <div class="form-group">
-                        <label for="description">Descrição:</label>
-                        <textarea class="form-control" id="description" name="description" rows="3" required [(ngModel)]="product.description"></textarea>
+                        <label for="description">Descrição Thumbnail:</label>
+                        <textarea class="form-control" id="description" name="description_thumbnail" rows="3" required [(ngModel)]="product.translation.description_thumbnail"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="price">Preço:</label>
@@ -28,7 +29,6 @@ import { ShoppingProduct } from '../../models/shopping-product.model';
                     <div class="form-group">
                         <label for="image">Imagem:</label>
                         <input type="file" class="form-control" id="image" name="image" (change)="onImageChange($event)">
-                        <img *ngIf="product.image" [src]="product.image" class="preview-image">
                     </div>
                 </form>
             </div>
@@ -43,10 +43,10 @@ import { ShoppingProduct } from '../../models/shopping-product.model';
 })
 export class ModalProductComponent {
     
-    @Input() product: ShoppingProduct = new ShoppingProduct();
+    @Input() product!: Product;
     @Input() title: string = "Adicionar Produto";
     @Output() clickBackground: EventEmitter<Event> = new EventEmitter<Event>()
-    @Output() saveProductClick: EventEmitter<ShoppingProduct> = new EventEmitter<ShoppingProduct>()
+    @Output() saveProductClick: EventEmitter<Product> = new EventEmitter<Product>()
 
     closeModal(): void {
         this.clickBackground.emit()
@@ -61,7 +61,7 @@ export class ModalProductComponent {
         const reader = new FileReader();
 
         reader.onload = () => {
-            this.product.image = reader.result as string;
+            this.product.image_thumbnail = reader.result as string;
         };
 
         reader.readAsDataURL(file);

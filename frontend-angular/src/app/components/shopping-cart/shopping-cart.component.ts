@@ -1,5 +1,5 @@
 import { Component, ElementRef, EventEmitter, HostListener, Input, Output } from "@angular/core";
-import { ShoppingProduct } from "../../models/shopping-product.model";
+import { Product } from "../../models/product.model";
 import { JwtService } from "../../service/jwt";
 
 @Component({
@@ -8,7 +8,7 @@ import { JwtService } from "../../service/jwt";
     styleUrls: ['./shopping-cart.component.scss']
   })
   export class ShoppingCart {
-    @Input() products: ShoppingProduct[] = []
+    @Input() products: Product[] = []
     @Input() shoppingCartOpened: boolean = false;
     @Output() clickedOutsideShoppingCart: EventEmitter<Event> = new EventEmitter<Event>()
 

@@ -4,19 +4,12 @@
   "description": "Manunscrito Backend",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "dev": "ts-node-dev --respawn --transpile-only index.ts",
+    "build": "tsc"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/HardikVB/manunscrito-project.git"
-  },
-  "author": "Hardik Bachu",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/HardikVB/manunscrito-project/issues"
-  },
-  "homepage": "https://github.com/HardikVB/manunscrito-project#readme",
   "dependencies": {
+    "@types/sequelize": "^4.28.20",
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
@@ -25,6 +18,15 @@
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
     "mysql2": "^3.10.0",
+    "node-cache": "^5.1.2",
     "sequelize": "^6.37.3"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.6",
+    "@types/node-cache": "^4.2.5",
+    "ts-node-dev": "^1.1.6",
+    "typescript": "^4.5.4"
   }
 }

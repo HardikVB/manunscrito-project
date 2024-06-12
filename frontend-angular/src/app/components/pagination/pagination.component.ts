@@ -1,16 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ShoppingProduct } from '../../models/shopping-product.model';
+import { Product } from '../../models/product.model';
 import { ButtonType, Types } from '../../models/toggle-button.model';
 import { ToastService } from '../../service/toast.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { ShoppingService } from '../../service/shopping.service';
-
-interface Product {
-  title: string;
-  price: number;
-  available: boolean;
-}
 
 @Component({
   selector: 'pagination',
@@ -20,55 +14,52 @@ interface Product {
 
 
 export class PaginationComponent {
-    @Input() products: ShoppingProduct[] = [];
+    @Input() products: Product[] = [];
     @Input() isAdmin: boolean = false;
     @Input() pageSize: number = 12;
     @Input() currentPage: number = 1;
     @Input() sizes: number[] = [6, 12, 36, 72];
-    @Output() clickProduct: EventEmitter<ShoppingProduct> = new EventEmitter<ShoppingProduct>()
-    @Output() clickEditProduct: EventEmitter<ShoppingProduct> = new EventEmitter<ShoppingProduct>()
-    @Output() clickRemoveProduct: EventEmitter<ShoppingProduct> = new EventEmitter<ShoppingProduct>()
-    @Output() clickAddProductToCart: EventEmitter<ShoppingProduct> = new EventEmitter<ShoppingProduct>()
-    @Output() clickAddProduct: EventEmitter<ShoppingProduct> = new EventEmitter<ShoppingProduct>()
+    @Input() totalProducts: number = 1;
+    @Output() clickProduct: EventEmitter<Product> = new EventEmitter<Product>()
+    @Output() clickEditProduct: EventEmitter<Product> = new EventEmitter<Product>()
+    @Output() clickRemoveProduct: EventEmitter<Product> = new EventEmitter<Product>()
+    @Output() clickAddProduct: EventEmitter<Product> = new EventEmitter<Product>()
+
+    @Output() clickPreviousPage: EventEmitter<Event> = new EventEmitter();
+    @Output() clickNextPage: EventEmitter<Event> = new EventEmitter();
+    @Output() changePageSize: EventEmitter<number> = new EventEmitter();
         
     // Simple private settings for component
     isGridView: boolean = true;
-    totalProducts: number = this.pageSize;
     modalEditProductShow: boolean = false;
     modalRemovalConfirmationShow: boolean = false;
-    newProduct: ShoppingProduct = new ShoppingProduct();
+    newProduct: Product = new Product();
+
+    constructor() {
+        this.newProduct.loading = false;
+    }
 
     // Toggler for list and grid
     togglerOptions: ButtonType[] = [{icon: "fa-solid fa-th", type: Types.GRID}, {icon: "fa-solid fa-list", type: Types.LIST}]
 
-    constructor(private httpClient: HttpClient, private toastService: ToastService, private shoppingService: ShoppingService)  {
-        this.getProducts()
-    }
-
-    clickedOnEditProduct(product: ShoppingProduct) {
+    clickedOnEditProduct(product: Product) {
         this.clickEditProduct.emit(product);
     }
 
-    clickedOnRemoveProduct(product: ShoppingProduct) {
+    clickedOnRemoveProduct(product: Product) {
         this.clickRemoveProduct.emit(product);
     }
 
-    clickedOnProduct(product: ShoppingProduct) {
+    clickedOnProduct(product: Product) {
         this.clickProduct.emit(product);
     }
 
     clickedOnAddProduct() {
         this.clickAddProduct.emit(this.newProduct);
     }
-    
-    addToCart(shoppingItem: ShoppingProduct) {
-        this.clickAddProductToCart.emit(shoppingItem);
-    }
 
     onOptionSelected(option: any) {
-        this.pageSize = option;
-
-        this.toastService.showLoadingToast("A buscar produtos", () => this.getProducts() )      
+        this.changePageSize.emit(option);
     }
 
     // Método para alternar entre visualização de grid e lista
@@ -79,58 +70,18 @@ export class PaginationComponent {
     // Método para navegar para a próxima página
     nextPage(): void {
         if (this.products.length < this.totalProducts) {
-
-            this.currentPage++;
-
-            this.getProducts()
+            this.clickNextPage.emit()
         }
     }
 
     // Método para navegar para a página anterior
     previousPage(): void {
         if (this.currentPage > 1) {
-
-            this.currentPage--;
-
-            this.getProducts()
+            this.clickPreviousPage.emit()
         }
     }
 
     calculateNumberPages() {
-        return Math.ceil(this.totalProducts / this.products.length)
-    }
-
-    async getProducts(): Promise<any> {
-        
-        this.populateLoadingCards()
-
-        let response: any;
-
-        try {
-
-          const response = await this.httpClient.get<any>(`${environment.apiUrl}/store/products?page=${this.currentPage}&pageSize=${this.isAdmin ? this.pageSize - 1 : this.pageSize}`).toPromise();
-
-          this.products = response.products;
-
-          this.totalProducts = response.count;
-
-        } catch (error) {
-
-            this.toastService.showErrorToast("Erro ao obter produtos!");
-        }
-
-        this.newProduct.loading = false;
-
-        return response;
-    }
-
-    populateLoadingCards() {
-        this.products = []
-
-        for(let i = 0; i < this.pageSize; i++) {
-            this.newProduct.loading = true;
-
-            this.products.push({loading: true})
-        }
+        return Math.ceil(this.totalProducts / this.pageSize)
     }
 }

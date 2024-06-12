@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastService } from '../../service/toast.service';
 import { ToastType } from '../../models/toast.model';
+import { AuthService } from '../../service/auth.service';
 
 @Component({
   selector: 'app-logout-page',
@@ -9,16 +10,16 @@ import { ToastType } from '../../models/toast.model';
 })
 export class LogoutPage implements OnInit {
 
-  constructor(private router: Router, private toastService: ToastService) { }
+  constructor(private router: Router, private toastService: ToastService, private authService: AuthService) { }
 
   ngOnInit(): void {
-    // Remover o token de acesso do localStorage
-    localStorage.removeItem('accessToken');
+    
+    this.authService.clearToken()
 
     this.toastService.showSuccessToast("Desconectado com sucesso!")
 
     // Redirecionar para a página inicial
-    this.router.navigate(['/']);
+    this.router.navigate(['/'])
   }
 
 }

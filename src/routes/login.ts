@@ -1,23 +1,27 @@
-const express = require('express');
-const router = express.Router();
-const { findUserByEmail } = require('../utils/db-functions')
-const { generateAccessToken } = require('../utils/auth')
-const bcrypt = require('bcrypt')
+import { Request, Response } from 'express';
+import express from 'express';
+import bcrypt from 'bcrypt';
+import { User } from '../db/user-db';
+import { findUserByEmail } from '../utils/db-functions';
 
-router.post('/', async (req, res) => {
+const router = express.Router();
+const { generateAccessToken } = require('../utils/auth')
+
+
+router.post('/', async (req: Request, res: Response) => {
     console.log(`[POST] Login`)
 
-    const { email, password } = req.body;
+    let userRequest = req.body as User;
 
     try {
-        const user = await findUserByEmail(email);
+        const user = await findUserByEmail(userRequest.email);
 
         if (user == null) {
             return res.status(400).send('Nome de utilizador ou palavra-passe incorretos');
         }
 
         // Comparar a senha fornecida com o hash da senha armazenada no banco de dados
-        const match = await bcrypt.compare(password, user.password);
+        const match = await bcrypt.compare(userRequest.password, user.password);
 
         if (!match) {
             return res.status(400).send('Nome de utilizador ou palavra-passe incorretos');
@@ -33,4 +37,4 @@ router.post('/', async (req, res) => {
     }
 });
   
-module.exports = router;
+export { router }

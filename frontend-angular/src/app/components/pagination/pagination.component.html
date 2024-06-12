@@ -1,32 +1,33 @@
-<div class="row justify-content-end">
-    <div class="col d-flex w-fit-content">
-        <toggle-button [options]="togglerOptions" (toggled)="toggleView($event)"></toggle-button>
+<div class="top-pagination">
+    <div class="row justify-content-end">
+        <div class="col d-flex w-fit-content">
+            <toggle-button [options]="togglerOptions" (toggled)="toggleView($event)"></toggle-button>
+        </div>
+        <div class="col d-flex w-fit-content">
+            <dropdown [options]="sizes" [selectedOption]="pageSize" (optionSelected)="onOptionSelected($event)" label="Produtos por página"></dropdown>
+        </div>
     </div>
-    <div class="col d-flex w-fit-content">
-        <dropdown [options]="sizes" [selectedOption]="pageSize" (optionSelected)="onOptionSelected($event)" label="Produtos por página"></dropdown>
+    
+    <div class="row grid-view" *ngIf="isGridView">
+        <div [hidden]="!isAdmin" class="col-lg-2 col-md-4 col-sm-12 pb-12 pt-12">
+            <product-item 
+                [isAdmin]="isAdmin"
+                [product]="newProduct"
+                (clickProduct)="clickedOnAddProduct()" ></product-item>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-12 pb-12 pt-12" *ngFor="let product of products">
+            <product-item 
+                [isAdmin]="isAdmin"
+                [product]="product"
+                (clickProduct)="clickedOnProduct($event)" 
+                (clickEditProduct)="clickedOnEditProduct($event)" 
+                (clickRemoveProduct)="clickedOnRemoveProduct($event)"></product-item>
+        </div>
     </div>
-</div>
-
-<div class="row grid-view" *ngIf="isGridView">
-    <div [hidden]="!isAdmin" class="col-lg-2 col-md-4 col-sm-12 pb-12 pt-12">
-        <product-item 
-            [isAdmin]="isAdmin"
-            [product]="newProduct"
-            (clickProduct)="clickedOnAddProduct()" ></product-item>
+    
+    <div class="list-view" *ngIf="!isGridView">
+        <product-row *ngFor="let product of products" [product]="product"></product-row>
     </div>
-    <div class="col-lg-2 col-md-4 col-sm-12 pb-12 pt-12" *ngFor="let product of products">
-        <product-item 
-            [isAdmin]="isAdmin"
-            [product]="product" 
-            (clickAddToCart)="addToCart($event)" 
-            (clickProduct)="clickedOnProduct($event)" 
-            (clickEditProduct)="clickedOnEditProduct($event)" 
-            (clickRemoveProduct)="clickedOnRemoveProduct($event)"></product-item>
-    </div>
-</div>
-
-<div class="list-view" *ngIf="!isGridView">
-    <product-row *ngFor="let product of products" [product]="product"></product-row>
 </div>
 
 <div class="pagination">

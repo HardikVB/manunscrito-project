@@ -1,15 +1,51 @@
 .card {
-  border-radius: 15px;
+  border-radius: 12.5px !important;
   transition: box-shadow 0.3s ease;
-  min-height: 30vh;
   display: flex;
   position: relative; // Adicione isso para permitir a sobreposição do gradiente
+  padding: 5px 10px;
+  min-height: 475px;
 
+  .img-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 10px;
+
+    .card-img-top {
+      height: 100% !important;
+      width: 100% !important;
+      max-height: 100% !important;
+      min-height: 100% !important;
+      max-width: 100% !important;
+      min-width: 100% !important;
+    }
+  }
+  
   .card-body {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    h2 {
+      font-size: 24px;
+      text-align: left !important;
+      font-weight: 600;
+      text-transform: capitalize;
+      width: 100%;
+    } 
+
+    p {
+      font-size: 13px;
+      color: #959393;
+      width: 100%;
+      line-height: 18.9px;
+      word-wrap: break-word !important;
+      overflow-wrap: break-word !important;
+      white-space: break-spaces;
+      margin-bottom: 0;
+    }
   }
 
   .gradient-overlay {
@@ -23,17 +59,18 @@
   }
 }
 
+.card-footer {
+  background-color: transparent !important;
+  border: none !important;
+
+  .price-show {
+    width: 100%;
+    font-size: 32px;
+  }
+}
+
 .card:hover {
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
-}
-
-.card-img-top {
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
-}
-
-.card-body {
-  padding: 1.25rem;
 }
 
 .card-title {

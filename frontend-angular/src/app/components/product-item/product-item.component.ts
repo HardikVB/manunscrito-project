@@ -1,11 +1,5 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ShoppingProduct } from '../../models/shopping-product.model';
-
-interface Product {
-  title: string;
-  price: number;
-  available: boolean;
-}
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Product } from '../../models/product.model';
 
 @Component({
   selector: 'product-item',
@@ -15,23 +9,16 @@ interface Product {
 
 
 export class ProductItemComponent {
-  @Input() product: ShoppingProduct = new ShoppingProduct();
+  @Input() product: Product = new Product();
   @Input() isAdmin: boolean = false;
-  @Output() clickProduct: EventEmitter<ShoppingProduct> = new EventEmitter<ShoppingProduct>();
-  @Output() clickAddToCart: EventEmitter<ShoppingProduct> = new EventEmitter<ShoppingProduct>();
-  @Output() clickEditProduct: EventEmitter<ShoppingProduct> = new EventEmitter<ShoppingProduct>();
-  @Output() clickRemoveProduct: EventEmitter<ShoppingProduct> = new EventEmitter<ShoppingProduct>();
+  @Output() clickProduct: EventEmitter<Product> = new EventEmitter<Product>();
+  @Output() clickEditProduct: EventEmitter<Product> = new EventEmitter<Product>();
+  @Output() clickRemoveProduct: EventEmitter<Product> = new EventEmitter<Product>();
 
   clickedOnProduct(event: Event) {
     event.stopPropagation();
 
     this.clickProduct.emit(this.product);
-  }
-
-  addToCart(event: Event) {
-    event.stopPropagation();
-
-    this.clickAddToCart.emit(this.product);
   }
 
   editProduct(event:Event) {
