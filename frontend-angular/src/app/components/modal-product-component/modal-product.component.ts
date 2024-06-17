@@ -21,11 +21,11 @@ import { Image } from '../../models/image.model';
                     </div>
                     <div class="form-group">
                         <label for="description">Descrição Thumbnail:</label>
-                        <textarea class="form-control" id="description" name="description" rows="3" required [(ngModel)]="product.translation.description"></textarea>
+                        <textarea class="form-control" id="description" name="description_thumbnail" rows="2" required [(ngModel)]="product.translation.description_thumbnail"></textarea>
                     </div>
                     <div class="form-group" *ngIf="multiImages">
                         <label for="description">Descrição:</label>
-                        <textarea class="form-control" id="description" name="description" rows="3" required [(ngModel)]="product.translation.description"></textarea>
+                        <textarea class="form-control" id="description" name="description" rows="6" required [(ngModel)]="product.translation.description"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="price">Preço:</label>
