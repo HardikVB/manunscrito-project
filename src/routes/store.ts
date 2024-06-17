@@ -36,6 +36,8 @@ router.get('/products', async (req: LanguageRequest, res: Response) => {
       products.push({id: product.id, translation: translation, images: product.images, image_thumbnail: product.image_thumbnail, price: product.price})
     })
 
+    console.log("Teste")
+
     res.json({ count: rows.length, products: products });
 
   } catch (error) {
