@@ -43,7 +43,7 @@ async function verifyAdminPrivilage(req: Request, res: Response, next: NextFunct
     const user = await authenticateToken(req, res);
 
     if(!user) {
-      return res.status(404).json({ error: 'User not found' });
+      return null;
     }
 
     const userDb = await findUserByEmail(user.email);

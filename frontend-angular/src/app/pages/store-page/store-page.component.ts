@@ -29,7 +29,8 @@ export class StorePage {
     private httpClient: HttpClient,
     private jwtService: JwtService,
     private toastService: ToastService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) {
     this.token = localStorage.getItem('accessToken');
 
@@ -68,7 +69,6 @@ export class StorePage {
   }
 
   async saveProduct(product: Product) {
-    console.log(product)
     if (!product.id) {
       this.toastService.showLoadingToast(
         "Produto a ser alterado",
@@ -146,5 +146,9 @@ export class StorePage {
       for(let i = 0; i < this.pageSize; i++) {
           this.products.push(new Product())
       }
+  }
+
+  productSinglePage(product: Product) {
+    this.router.navigate([`${this.language}/store/${product.id}`])
   }
 }

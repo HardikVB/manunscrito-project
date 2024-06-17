@@ -1,3 +1,6 @@
-<div [classList]="shoppingCartOpened ? 'products opened' : 'products closed'">
-    <product-row *ngFor="let product of products" [product]="product" imgStyle="width: 100%; height: auto"></product-row>
+<div [classList]="shoppingCartOpened ? 'products opened gap-2' : 'products closed '">
+    <div class="d-flex justify-content-start flex-column product-row-div">
+        <product-row *ngFor="let product of products" [product]="product" imgStyle="width: 100%; height: auto"></product-row>
+    </div>
+    <button class="btn btn-primary">Finalizar Compra</button>
 </div>

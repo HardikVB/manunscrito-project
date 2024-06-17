@@ -1,0 +1,13 @@
+img {
+    width: 100%;
+    height: auto;
+    cursor: pointer;
+    border-radius: 25px;
+}
+
+
+.image-big {
+    height: 550px;
+    width: 100%;
+    object-fit: cover;
+}

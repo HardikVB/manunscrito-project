@@ -13,7 +13,6 @@ interface LanguageRequest extends Request {
 
 
 // Rota para obter produtos com paginação
-// Rota para obter produtos com paginação
 router.get('/products', async (req: LanguageRequest, res: Response) => {
   const page = parseInt(req.query.page as string) || 1;
   const pageSize = parseInt(req.query.pageSize as string) || 10;
@@ -37,7 +36,34 @@ router.get('/products', async (req: LanguageRequest, res: Response) => {
       products.push({id: product.id, translation: translation, images: product.images, image_thumbnail: product.image_thumbnail, price: product.price})
     })
 
-    res.json({ count, products: products });
+    res.json({ count: rows.length, products: products });
+
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// Rota para obter produtos com paginação
+router.get('/product/:id', async (req: LanguageRequest, res: Response) => {
+  const productId = req.params.id;
+  const language = req.language;
+
+  try {
+    // Consulta para obter os produtos com suas traduções no idioma especificado
+    var product = await Product.findByPk(productId, {
+      
+      include: [
+        { model: ProductTranslation, required: false, as: 'translations', where: { language: language } },
+        { model: ProductImage, required: false, as: 'images' }
+      ],
+    })
+
+    if(product) {
+      res.json({id: product.id, translation: product.translations.find((translation => translation.language == language)), images: product.images, image_thumbnail: product.image_thumbnail, price: product.price})
+    } else {
+      res.status(404).json({ error: 'Not possible to find' });
+    }
 
   } catch (error) {
     console.error('Error fetching products:', error);
@@ -90,7 +116,7 @@ router.post('/add', verifyAdminPrivilage, async (req: LanguageRequest, res: Resp
 
 // Rota para editar um produto existente por ID
 router.put('/edit/:id', verifyAdminPrivilage, async (req: LanguageRequest, res: Response) => {
-  console.log(req.params)
+
   const productId = req.params.id;
 
   let updateProduct = req.body as ProductRequest;

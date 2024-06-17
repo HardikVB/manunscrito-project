@@ -1,0 +1,48 @@
+<div class="container p4 mt-4 mb-4">
+    <div class="row single-page-product" *ngIf="product != null">
+        <div class="col-lg-6 col-sm-12 mb-5">
+            <div class="row image-container">
+                <div class="col-12 mb-3">
+                    <img class="image-big" src="{{selectedImage ?? product?.image_thumbnail}}" alt="{{product?.id}}">
+                </div>
+                <div class="col-3" *ngFor="let image of product?.images">
+                    <img class="image-small" src="{{image.image_base64}}" alt="{{product?.id}}" (mouseenter)="selectedImage = image.image_base64" (mouseleave)="selectedImage = product?.image_thumbnail">
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-sm-12 d-flex justify-content-center flex-column">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>{{product?.translation?.title}}</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h5>Descrição</h5>
+                    <p>{{product?.translation?.description ?? product?.translation?.description_thumbnail}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>{{product?.price}} €</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <button class="btn btn-primary mr-2" (click)="addToCart()">Add to cart</button>
+                </div>
+            </div>
+            <div class="d-flex w-100 mt-2 gap-2" *ngIf="isAdmin && product.id != null">
+                <button class="btn btn-warning mr-2" (click)="editProduct()">
+                    <i class="fas fa-edit"></i>
+                </button>
+                <button class="btn btn-danger" (click)="removeProductShowModal()">
+                    <i class="fas fa-remove"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<modal-edit-product [multiImages]="true" [hidden]="!modalProductShow" [product]="product!" (clickBackground)="modalProductShow = !modalProductShow" [title]="product!.translation!.title!" (saveProductClick)="saveProduct($event)" *ngIf="product"></modal-edit-product>
+<modal-confirm-removal [hidden]="!modalRemoveProductShow" (closeModal)="modalRemoveProductShow = !modalRemoveProductShow" (confirmRemove)="removeProduct()"></modal-confirm-removal>
