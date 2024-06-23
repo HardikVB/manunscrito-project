@@ -8,4 +8,27 @@ import { Product } from "../../models/product.model";
   export class ProductRowComponent {
     @Input() product: Product = new Product()
     @Input() imgStyle: any;
+    @Input() isAdmin: Boolean = false;
+
+    @Output() clickEditProductEvent: EventEmitter<Product> = new EventEmitter<Product>();
+    @Output() clickRemoveProductEvent: EventEmitter<Product> = new EventEmitter<Product>();
+    @Output() clickProductEvent: EventEmitter<Product> = new EventEmitter<Product>();
+
+    clickProduct(event: Event) {
+      event.stopPropagation();
+
+      this.clickProductEvent.emit(this.product);
+    }
+
+    editProduct(event: Event) {
+      event.stopPropagation();
+
+      this.clickEditProductEvent.emit(this.product)
+    }
+
+    removeProduct(event: Event) {
+      event.stopPropagation();
+
+      this.clickRemoveProductEvent.emit(this.product)
+    }
 }

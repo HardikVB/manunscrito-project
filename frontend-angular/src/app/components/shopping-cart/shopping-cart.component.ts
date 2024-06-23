@@ -11,6 +11,7 @@ import { JwtService } from "../../service/jwt";
     @Input() products: Product[] = []
     @Input() shoppingCartOpened: boolean = false;
     @Output() clickedOutsideShoppingCart: EventEmitter<Event> = new EventEmitter<Event>()
+    @Output() clickedFinishOrder: EventEmitter<Event> = new EventEmitter<Event>()
 
     constructor(private jwtService: JwtService, private elementRef: ElementRef) {
     }
@@ -25,5 +26,9 @@ import { JwtService } from "../../service/jwt";
 
             this.clickedOutsideShoppingCart.emit(event)
         }
+    }
+
+    finishOrder() {
+        this.clickedFinishOrder.emit();
     }
 }

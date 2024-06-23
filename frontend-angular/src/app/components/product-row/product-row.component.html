@@ -1,12 +1,20 @@
-<div class="row">
+<div class="row w-100" (click)="clickProduct($event)">
     <div class="col col-3 d-flex justify-content-start align-items-stretch">
         <img src="{{product.image_thumbnail}}" alt="{{product.translation.title}}" class="img-fluid align-self-stretch" [style]="imgStyle">
     </div>
     <div class="col col-3 d-flex">
-        <span>{{product.translation.title}}</span>
+        <h5>{{product.translation.title}}</h5>
     </div>
     <div class="col col-3 d-flex">
         <span>{{product.translation.description_thumbnail}}</span>
+    </div>
+    <div class="col col-3 d-flex gap-2" *ngIf="isAdmin">
+        <button class="btn btn-warning mr-2" (click)="editProduct($event)">
+            <i class="fas fa-edit"></i>
+        </button>
+        <button class="btn btn-danger" (click)="removeProduct($event)">
+            <i class="fas fa-remove"></i>
+        </button>
     </div>
   </div>
   

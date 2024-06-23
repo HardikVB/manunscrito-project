@@ -98,6 +98,12 @@ export class SinglePageProduct {
     }
 
     addToCart() {
+      this.toastService.showSuccessToast("Produto adicionado com sucesso à shopping cart");
+
       this.shoppingService.addProduct(this.product!);
+    }
+
+    checkProductInShoppingCart() {
+      return this.shoppingService.getProductById(this.product!.id) != null
     }
 }

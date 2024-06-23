@@ -36,5 +36,5 @@
       </div>
     </nav>
 
-    <shopping-cart [shoppingCartOpened]="shoppingCartOpened" [products]="products" (clickedOutsideShoppingCart)="shoppingCartOpened = !shoppingCartOpened"></shopping-cart>
+    <shopping-cart [shoppingCartOpened]="shoppingCartOpened" [products]="products" (clickedOutsideShoppingCart)="shoppingCartOpened = !shoppingCartOpened" (clickedFinishOrder)="finishOrder()"></shopping-cart>
 </header>

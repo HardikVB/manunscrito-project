@@ -93,3 +93,9 @@ span {
   width: 100%;
   border-radius: 25px;
 }
+
+
+.flex-col {
+  flex-direction: column;
+  gap: 15px;
+}

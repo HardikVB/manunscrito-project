@@ -1,0 +1,29 @@
+:host {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    .container-fluid {
+        
+
+        .row {
+
+            .col-12 {
+                .container {
+                    .icon-container {
+                        padding: 20px;
+                        font-size: 5vw;
+                        background-color: #2c8013;
+                        border-radius: 50%;
+                        width: 10vw;
+                        height: 10vw;
+                        color: white;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -3,7 +3,7 @@ export class Translation {
     language?: string
     title?: string
     description?: string
-    description_thumbnail!: string
+    description_thumbnail?: string
     productId!: number
 }
   

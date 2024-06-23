@@ -5,6 +5,9 @@ import { Product } from '../../models/product.model';
 import { ShoppingService } from '../../service/shopping.service';
 import { AuthService } from '../../service/auth.service';
 import { response } from 'express';
+import { ToastService } from '../../service/toast.service';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-header',
@@ -22,7 +25,9 @@ export class HeaderComponent implements OnInit {
     private jwtService: JwtService,
     private authService: AuthService,
     private shoppingService: ShoppingService,
-    private route: Router
+    private toastService: ToastService,
+    private route: Router,
+    private httpClient: HttpClient
     
   ) {
     this.token = localStorage.getItem('accessToken');
@@ -66,5 +71,25 @@ export class HeaderComponent implements OnInit {
 
   openShoppingCart() {
     this.shoppingCartOpened = !this.shoppingCartOpened;
+  }
+
+  finishOrder() {
+
+    if(!this.token) return this.route.navigate([`${this.language}/login`]);
+
+    const decodedToken = this.jwtService.decodeToken(this.token!)
+
+    console.log(decodedToken)
+
+    const request = {
+      userId: decodedToken.id,
+      products: this.shoppingService.getProducts()
+    }
+
+    this.toastService.showLoadingToast("Finalizando a compra", "Compra finalizada", () => this.httpClient.post(`${environment.apiUrl}/${this.language}/shopping/finish`, request).toPromise().then((response) => {
+      this.route.navigate([`${this.language}/success`])
+    }))
+
+    return null;
   }
 }

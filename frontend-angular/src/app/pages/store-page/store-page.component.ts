@@ -51,9 +51,9 @@ export class StorePage {
   productModal(product: Product): void {
     product.id == null ? this.modalProductTitle = "Adicionar Produto" : this.modalProductTitle = "Editar Produto"
 
-    this.selectedProduct.translation.description_thumbnail = product.translation.description_thumbnail;
-    this.selectedProduct.translation.language = product.translation.language;
-    this.selectedProduct.translation.title = product.translation.title;
+    this.selectedProduct.translation.description_thumbnail = product.translation?.description_thumbnail;
+    this.selectedProduct.translation.language = product.translation?.language;
+    this.selectedProduct.translation.title = product.translation?.title;
     this.selectedProduct.price = product.price;
     this.selectedProduct.image_thumbnail = product.image_thumbnail;
     this.selectedProduct.id = product.id

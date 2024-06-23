@@ -1,0 +1,19 @@
+
+<div class="dashboard-page">
+  <div class="container">
+    <div class="row">
+      <div class="col-2">
+        <ul class="dashboard-items">
+          
+        </ul>
+      </div>
+      <div class="col-10">
+        <dynamic-pagination [items]="data" (clickItem)="checkUserInfo($event)" (clickProduct)="checkProductInfo($event)"></dynamic-pagination>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<modal-edit-product [hidden]="!modalProductShow" [product]="selectedProduct" (clickBackground)="modalProductShow = !modalProductShow" title="Produto"></modal-edit-product>
+<modal-user [hidden]="!modalUserShow" [user]="user" (clickBackground)="modalUserShow = !modalUserShow"></modal-user>

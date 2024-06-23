@@ -33,6 +33,9 @@ import { AuthService } from './service/auth.service';
 import { NotFoundPage } from './pages/not-found-page/note-found-page.component';
 import { RegisterPage } from './pages/register-page/register-page.component';
 import { SinglePageProduct } from './pages/single-page-product/single-page-product.component';
+import { DynamicPaginationComponent } from './components/dynamic-pagination/dynamic-pagination.component';
+import { DashboardPage } from './pages/dashboard-page/dashboard-page.component';
+import { ModalUserComponent } from './components/modal-user-component/modal-user.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, '/assets/i18n/', '.json');
@@ -55,13 +58,16 @@ export function HttpLoaderFactory(http: HttpClient) {
     ToastComponent,
     ConfirmRemoveModalComponent,
     ProductRowComponent,
+    DynamicPaginationComponent,
+    ModalUserComponent,
     HomePage,
     StorePage,
     LogoutPage,
     LoginPage,
     NotFoundPage,
     RegisterPage,
-    SinglePageProduct
+    SinglePageProduct,
+    DashboardPage
   ],
   imports: [
     CommonModule,

@@ -8,8 +8,12 @@ import { NotFoundPage } from './pages/not-found-page/note-found-page.component';
 import { LanguageGuard } from './service/language-guard';
 import { RegisterPage } from './pages/register-page/register-page.component';
 import { SinglePageProduct } from './pages/single-page-product/single-page-product.component';
+import { DashboardPage } from './pages/dashboard-page/dashboard-page.component';
+import { SuccessPage } from './pages/success-page/success-page.component';
 
 const routes: Routes = [
+  { path: ':language/success', component: SuccessPage, canActivate: [LanguageGuard] },
+  { path: ':language/dashboard', component: DashboardPage, canActivate: [LanguageGuard] },
   { path: ':language/home', component: HomePage, canActivate: [LanguageGuard] },
   { path: ':language/register', component: RegisterPage, canActivate: [LanguageGuard] },
   { path: ':language/store', component: StorePage, canActivate: [LanguageGuard] },

@@ -1,4 +1,5 @@
 import { Sequelize, DataTypes, Model, Optional } from 'sequelize';
+import { OrderProducts } from './order-products';
 
 interface UserAttributes {
   id: number;
@@ -16,6 +17,7 @@ class User extends Model<UserAttributes, UserCreationAttributes> implements User
   public email!: string;
   public password!: string;
   public privilege!: string;
+  public OrderProducts!: OrderProducts[]
 
   static initModel(sequelize: Sequelize) {
     User.init(

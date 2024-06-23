@@ -26,7 +26,13 @@
     </div>
     
     <div class="list-view" *ngIf="!isGridView">
-        <product-row *ngFor="let product of products" [product]="product"></product-row>
+        <product-row 
+            *ngFor="let product of products" 
+            [product]="product"
+            [isAdmin]="isAdmin"
+            (clickProductEvent)="clickedOnProduct($event)"
+            (clickEditProductEvent)="clickedOnEditProduct($event)" 
+            (clickRemoveProductEvent)="clickedOnRemoveProduct($event)"></product-row>
     </div>
 </div>
 

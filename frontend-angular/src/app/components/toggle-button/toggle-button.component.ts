@@ -16,6 +16,8 @@ export class ToggleButtonComponent implements OnInit {
     }
 
     toggle(option: any): void {
+        if(this.activeOption == option) return
+        
         this.activeOption = option;
         this.toggled.emit(option)
     }

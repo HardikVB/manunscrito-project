@@ -15,6 +15,7 @@ class Product extends Model<ProductAttributes, ProductCreationAttributes> implem
   public price!: number;
   public image_thumbnail!: string;
   public translations!: ProductTranslation[];
+  public translation!: ProductTranslation;
   public images!: ProductImage[];
 
   static initModel(sequelize: Sequelize) {

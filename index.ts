@@ -8,6 +8,8 @@ import https from 'https';
 import { router as storeRoute } from './src/routes/store';
 import { router as loginRoute } from './src/routes/login';
 import { router as registerRoute } from './src/routes/register';
+import { router as dashboardRoute } from './src/routes/dashboard';
+import { router as shoppingRoute } from './src/routes/shopping';
 
 const app = express();
 
@@ -31,6 +33,8 @@ app.use('/:language', (req: LanguageRequest, res: Response, next: NextFunction) 
 app.use('/:language/login', loginRoute);
 app.use('/:language/store', storeRoute);
 app.use('/:language/register', registerRoute);
+app.use('/:language/dashboard', dashboardRoute);
+app.use('/:language/shopping', shoppingRoute);
 
 // Default route to serve the index.html file
 app.get('*', (req: Request, res: Response) => {

@@ -1,6 +1,7 @@
 <div [classList]="shoppingCartOpened ? 'products opened gap-2' : 'products closed '">
+    <p *ngIf="!products || products.length == 0">Não existem produtos no carrinho</p>
     <div class="d-flex justify-content-start flex-column product-row-div">
         <product-row *ngFor="let product of products" [product]="product" imgStyle="width: 100%; height: auto"></product-row>
     </div>
-    <button class="btn btn-primary">Finalizar Compra</button>
+    <button *ngIf="products.length > 0" class="btn btn-primary finalize_button" (click)="finishOrder()">Finalizar Compra</button>
 </div>

@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import express from 'express';
 import bcrypt from 'bcrypt';
 import { User } from '../db/user-db';
+import { generateAccessToken } from '../utils/auth';
 
 const router = express.Router();
 
@@ -19,13 +20,15 @@ router.post('/', async (req: Request, res: Response) => {
     user.privilege = "normal"
 
     // Adicionar o usuário com a senha criptografada ao banco de dados
-    await User.create(user);
+    user = await User.create(user);
 
-    res.status(201).send({message: 'Utilizador registado com sucesso!'});
+    const accessToken = generateAccessToken(user);
+
+    res.status(201).send({message: 'Utilizador registado com sucesso!', accessToken: accessToken});
 
   } catch (error) {
     console.log(error);
-    res.status(500).send({message: 'Utilizador registado com sucesso!'});
+    res.status(500).send({message: 'Utilizador registado sem sucesso!'});
   }
 });
 

@@ -11,6 +11,8 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
+    padding: 15px;
 }
 
 .closed {
@@ -25,4 +27,8 @@
     max-height: 100%;
     overflow-y: scroll;
     gap: 5px;
+}
+
+.finalize_button {
+    padding: 20px;
 }

@@ -1,0 +1,30 @@
+<div class="top-pagination">
+    <div class="row justify-content-end">
+        <div class="col d-flex w-fit-content">
+            <dropdown [options]="sizes" [selectedOption]="pageSize" (optionSelected)="onOptionSelected($event)" label="Produtos por página"></dropdown>
+        </div>
+    </div>
+    
+    <div class="list-view">
+        <div class="row product-row" *ngFor="let item of items" (click)="clickedOnItem(item)">
+            <div class="col-2 d-flex align-items-center justify-content-center">
+                <h3>{{item.id}}</h3>
+            </div>
+            <div class="col d-flex flex-col">
+                <product-row
+                *ngFor="let product of item.products"
+                [product]="product"
+                [isAdmin]="false"
+                class="d-flex"
+                (clickProductEvent)="clickedOnProduct(product)"
+                ></product-row>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="pagination">
+    <custom-button (onClick)="previousPage()" icon="fa-solid fa-arrow-left">Anterior</custom-button>
+    <span class="text-center">Página {{ currentPage }} de {{ calculateNumberPages() }}</span>
+    <custom-button (onClick)="nextPage()" icon="fa-solid fa-arrow-right">Próxima</custom-button>
+</div>
