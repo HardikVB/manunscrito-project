@@ -6,6 +6,7 @@ import { Product } from "../../models/product.model";
     styleUrls: ['./product-row.component.scss']
   })
   export class ProductRowComponent {
+    @Input() isCart: boolean = false;
     @Input() product: Product = new Product()
     @Input() imgStyle: any;
     @Input() isAdmin: Boolean = false;

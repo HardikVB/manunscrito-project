@@ -1,6 +1,7 @@
 import { Component, ElementRef, EventEmitter, HostListener, Input, Output } from "@angular/core";
 import { Product } from "../../models/product.model";
 import { JwtService } from "../../service/jwt";
+import { ShoppingService } from "../../service/shopping.service";
 
 @Component({
     selector: 'shopping-cart',
@@ -12,8 +13,9 @@ import { JwtService } from "../../service/jwt";
     @Input() shoppingCartOpened: boolean = false;
     @Output() clickedOutsideShoppingCart: EventEmitter<Event> = new EventEmitter<Event>()
     @Output() clickedFinishOrder: EventEmitter<Event> = new EventEmitter<Event>()
+    @Output() clickedRemoveItem: EventEmitter<Product> = new EventEmitter<Product>()
 
-    constructor(private jwtService: JwtService, private elementRef: ElementRef) {
+    constructor(private jwtService: JwtService, private elementRef: ElementRef, private shoppingService: ShoppingService) {
     }
 
     // Fecha o carrinho de compras quando um clique fora dele é detectado
@@ -30,5 +32,9 @@ import { JwtService } from "../../service/jwt";
 
     finishOrder() {
         this.clickedFinishOrder.emit();
+    }
+
+    removeShoppingItem(product: Product) {
+        this.clickedRemoveItem.emit(product);
     }
 }

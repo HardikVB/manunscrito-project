@@ -79,8 +79,6 @@ export class HeaderComponent implements OnInit {
 
     const decodedToken = this.jwtService.decodeToken(this.token!)
 
-    console.log(decodedToken)
-
     const request = {
       userId: decodedToken.id,
       products: this.shoppingService.getProducts()
@@ -91,5 +89,10 @@ export class HeaderComponent implements OnInit {
     }))
 
     return null;
+  }
+
+  removeItem(product: Product) {
+    this.shoppingService.removeProduct(product.id)
+    this.products = this.shoppingService.getProducts();
   }
 }

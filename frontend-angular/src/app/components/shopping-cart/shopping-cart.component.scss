@@ -25,7 +25,8 @@
 
 .product-row-div {
     max-height: 100%;
-    overflow-y: scroll;
+    overflow-y: auto;
+    overflow-x: hidden;
     gap: 5px;
 }
 

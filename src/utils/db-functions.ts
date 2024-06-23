@@ -54,7 +54,7 @@ async function getOrders(page = 1, pageSize = 10): Promise<any> {
   const offset = (page - 1) * pageSize;
 
   try {
-    const orders = await Order.findAll({
+    const orders = await Order.findAndCountAll({
       include: [{model: Product, as: 'products', include: [{model: ProductTranslation, as: 'translations'}]}, {model: User, as: 'users'}],
       limit: pageSize,
       offset: offset,

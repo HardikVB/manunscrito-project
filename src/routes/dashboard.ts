@@ -19,9 +19,9 @@ router.get("/orders", async (req: LanguageRequest, res: Response) => {
     const pageSize = parseInt(req.query.pageSize as string) || 10;
     const language = req.language;
 
-    const response = await getOrders(page, pageSize);
+    const { count, rows } = await getOrders(page, pageSize);
 
-    response.forEach((item: Order) => {
+    rows.forEach((item: Order) => {
         item.products.forEach((product) => {
             
             const translation = product.translations.find((translation) => translation.language == req.language) || new ProductTranslation();
@@ -30,7 +30,7 @@ router.get("/orders", async (req: LanguageRequest, res: Response) => {
         })
     })
     
-    return res.json(response);
+    return res.json({count, rows});
 })
 
 router.get("/user", async (req: LanguageRequest, res: Response) => {
