@@ -40,7 +40,7 @@ Order.belongsToMany(User, { through: OrderProducts, foreignKey: 'orderId', other
 User.belongsToMany(Order, { through: OrderProducts, foreignKey: 'userId', otherKey: 'orderId', as: 'users', uniqueKey: 'id' });
 
 // Sincronização do modelo com a base de dados
-sequelize.sync().then(() => {
+sequelize.sync({alter: true}).then(() => {
   console.log('Database synced');
 });
 

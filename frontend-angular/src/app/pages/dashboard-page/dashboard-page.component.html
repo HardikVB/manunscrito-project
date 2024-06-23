@@ -8,12 +8,12 @@
         </ul>
       </div>
       <div class="col-10">
-        <dynamic-pagination [items]="data" (clickItem)="checkUserInfo($event)" (clickProduct)="checkProductInfo($event)"></dynamic-pagination>
+        <dynamic-pagination [pageSize]="pageSize" [currentPage]="currentPage" [totalItems]="totalCount" [items]="data" (clickItem)="checkOrderInfo($event)" (clickProduct)="checkProductInfo($event)" (clickNextPage)="nextPage()" (clickPreviousPage)="previousPage()"></dynamic-pagination>
       </div>
     </div>
   </div>
 </div>
 
 
-<modal-edit-product [hidden]="!modalProductShow" [product]="selectedProduct" (clickBackground)="modalProductShow = !modalProductShow" title="Produto"></modal-edit-product>
-<modal-user [hidden]="!modalUserShow" [user]="user" (clickBackground)="modalUserShow = !modalUserShow"></modal-user>
+<modal-edit-product *ngIf="modalProductShow" [product]="selectedProduct" (clickBackground)="modalProductShow = !modalProductShow" title="Produto"></modal-edit-product>
+<modal-order *ngIf="modalOrderShow" [order]="order" (clickBackground)="modalOrderShow = !modalOrderShow" (saveOrderClick)="saveOrder($event)"></modal-order>

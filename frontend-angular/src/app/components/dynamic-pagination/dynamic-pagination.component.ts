@@ -71,6 +71,7 @@ export class DynamicPaginationComponent {
 
     // Método para navegar para a página anterior
     previousPage(): void {
+        console.log(this.currentPage)
         if (this.currentPage > 1) {
             this.clickPreviousPage.emit()
         }

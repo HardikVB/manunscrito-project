@@ -3,13 +3,40 @@
     <carousel [items]="carouselItems"></carousel>
     
     <div class="container">
-      <div class="category-icons">
-        <div class="category-icon">LIVROS</div>
-        <div class="category-icon">MANUSCRITOS</div>
-        <div class="category-icon">RETRATOS</div>
-        <div class="category-icon">DESENHOS</div>
+      <div class="row sobre-nos">
+        <section class="col">
+          <p class="">O Manuscrito Histórico nasceu em 1989, logo a seguir ao incêndio do Chiado pela iniciativa de uma família de 4 sócios representados por José e João Rebelo.</p>
+          <p class=""><span class="">Esta loja é um reduto de um Chiado literário e artístico que já não existe mas que se foi moldando nos últimos anos à passagem do tempo e com o charme reconfortante das memórias.</span></p>
+          <p class=""><span class="">Vive dentro do Palácio Valadares no mesmo local onde nasceu no século XIII, no reinado de D. Dinis, a primeira universidade de Lisboa.</span></p>
+          <p class=""><span class="">Enquadrada num bairro onde proliferavam as tipografias, as gráficas e vários outros ofícios artísticos, o pequeno espaço em abóbada que é o Manuscrito Histórico foi em tempos idos a loja Douradores da Casa “A Carmelita” e onde ainda se mantêm hoje a coleção original dos ferros de dourar centenários daquela casa, alguns deles emblemáticos como o ferro pessoal do Rei Carol da Roménia.</span></p>
+          <p class=""><span class="">Embora possa parecer um Museu que expõe peças como o busto do poeta Camões da Fábrica Devesas e o cartaz da Revista Contemporânea,&nbsp;o&nbsp;Manuscrito Histórico&nbsp;é uma loja com atmosfera modernista e&nbsp;<i class="">avant-garde</i>, onde poderá comprar peças originais e únicas, difíceis de serem encontradas noutros locais.</span></p>
+          <p class=""><span class="">Os clientes habituais e fiéis ao Manuscrito Histórico continuam a aparecer regularmente e são tratados como amigos.</span></p>
+        </section>
       </div>
 
-      <draggable-container></draggable-container>
+      <div class="row images-start">
+        <div class="col">
+          <img class="w-100" src="../../../assets/background-left.jpg">
+        </div>
+        <div class="col">
+          <img class="w-100" src="../../../assets/background-left.jpg">
+        </div>
+      </div>
+    </div>
+    <div class="row image-ilusion">
+      <div class="col d-flex align-items-center justify-content-center">
+        <div class="overlay"></div>
+        <h2 class="heading-title">Antiguidades<br>E <b>livros raros</b></h2>
+      </div>
+    </div>
+    <div class="image-grid-header row d-flex align-items-center justify-content-center">
+      <div class="col d-flex align-items-center justify-content-center">
+        <h4 class="heading-title color-black"><b>Manuscritos, Livros antigos, Documentos raros, <br>postais, gravuras e Antiguidades</b></h4>
+      </div>
+    </div>
+    <div class="row image-grid">
+      <div class="col-lg-3 col-md-6 col-sm-12" *ngFor="let image of gridImages">
+        <img class="w-100" [src]="image" alt="gridImage">
+      </div>
     </div>
 </div>

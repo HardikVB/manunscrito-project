@@ -35,7 +35,7 @@ import { RegisterPage } from './pages/register-page/register-page.component';
 import { SinglePageProduct } from './pages/single-page-product/single-page-product.component';
 import { DynamicPaginationComponent } from './components/dynamic-pagination/dynamic-pagination.component';
 import { DashboardPage } from './pages/dashboard-page/dashboard-page.component';
-import { ModalUserComponent } from './components/modal-user-component/modal-user.component';
+import { ModalUserComponent } from './components/modal-order-component/modal-order.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, '/assets/i18n/', '.json');

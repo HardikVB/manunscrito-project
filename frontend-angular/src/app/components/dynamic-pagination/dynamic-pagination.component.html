@@ -7,8 +7,9 @@
     
     <div class="list-view">
         <div class="row product-row" *ngFor="let item of items" (click)="clickedOnItem(item)">
-            <div class="col-2 d-flex align-items-center justify-content-center">
+            <div class="col-2 d-flex align-items-center justify-content-center flex-col">
                 <h3>{{item.id}}</h3>
+                <h5 class="status" [class]="'status ' + item.status">{{item.status}}</h5>
             </div>
             <div class="col d-flex flex-col">
                 <product-row

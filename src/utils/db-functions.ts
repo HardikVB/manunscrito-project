@@ -1,6 +1,6 @@
 
 import { OrderProducts } from '../db/order-products';
-import { Order } from '../db/orders-db';
+import { Order, StatusEnum } from '../db/orders-db';
 import { ProductResponse } from '../models/product-response.model';
 import { Product, ProductTranslation, User } from './db';
 
@@ -34,15 +34,24 @@ async function getUserOrders(userId: number): Promise<any> {
   try {
     const orders = await Order.findAll({
       include: [
-        {
-          model: Product,
-        },
-        {
-          model: User,
-          where: {id: userId}
-        }
+        {model: Product},{model: User,where: {id: userId}}
       ],
     });
+    return orders;
+  } catch (error) {
+    console.error('Error fetching user orders:', error);
+    throw error;
+  }
+}
+
+async function getOrderId(orderID: number): Promise<Order | null> {
+  try {
+    const orders = await Order.findByPk(orderID, {
+      include: [
+        {model: Product, as: 'products'},{model: User, as: 'users'}
+      ],
+    });
+
     return orders;
   } catch (error) {
     console.error('Error fetching user orders:', error);
@@ -54,13 +63,15 @@ async function getOrders(page = 1, pageSize = 10): Promise<any> {
   const offset = (page - 1) * pageSize;
 
   try {
-    const orders = await Order.findAndCountAll({
-      include: [{model: Product, as: 'products', include: [{model: ProductTranslation, as: 'translations'}]}, {model: User, as: 'users'}],
+    const count = await Order.count();
+
+    const orders = await Order.findAll({
+      include: [{model: Product, as: 'products', include: [{model: ProductTranslation, as: 'translations', required: false}], required: false}, {model: User, as: 'users', required: false}],
       limit: pageSize,
       offset: offset,
     });
 
-    return orders;
+    return {count: count, rows: orders};
   } catch (error) {
     console.error('Error fetching user orders:', error);
     throw error;
@@ -71,7 +82,7 @@ async function getOrders(page = 1, pageSize = 10): Promise<any> {
 async function addProductsToOrder(userId: number, products: Product[]): Promise<Order> {
   try {
     // Cria uma nova ordem associada ao usuário
-    const order = await Order.create({ userId: userId });
+    const order = await Order.create({ userId: userId, status: StatusEnum.WAITING_PAYMENT });
 
     await order.save();
 
@@ -92,4 +103,4 @@ async function addProductsToOrder(userId: number, products: Product[]): Promise<
   }
 }
 
-export {findUserByEmail, getProducts, getUserOrders, addProductsToOrder, getOrders, findUserById, findUsers}
+export {findUserByEmail, getProducts, getUserOrders, addProductsToOrder, getOrders, findUserById, findUsers, getOrderId}

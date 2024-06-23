@@ -8,6 +8,8 @@ interface OrderProductsAttributes {
   productId: number;
 }
 
+
+
 class OrderProducts extends Model<OrderProductsAttributes> implements OrderProductsAttributes {
   public id!: number;
   public orderId!: number;

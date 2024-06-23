@@ -2,7 +2,7 @@
     <div class="carousel-inner text-light text-center"> 
         <div *ngFor="let item of items; let i = index" class="carousel-item bg-white" [class.active]="i == 0" data-bs-interval="2000"> 
             <img [src]="item.src" alt="Banner Image {{ i }}" class="img-fluid w-100">
-            <h1 class="banner-title">{{item.title}}</h1>
+            <h1 class="banner-title"><b>{{item.title}}</b></h1>
         </div> 
     </div> 
 
