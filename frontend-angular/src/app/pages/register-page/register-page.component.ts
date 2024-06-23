@@ -37,7 +37,7 @@ export class RegisterPage implements OnInit {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       username: ['', Validators.required],
-      password: ['', [Validators.required, this.passwordValidator]], // Use o validador personalizado aqui
+      password: ['', [Validators.required, this.passwordValidator()]], // Use o validador personalizado aqui
       repeat_password: ['', Validators.required]
     }, { validators: this.passwordMatchValidator });
   }
@@ -79,7 +79,7 @@ export class RegisterPage implements OnInit {
           return { 'invalidPassword': true };
         }
 
-       return null;
+       return null
       };
     }
 
