@@ -10,8 +10,10 @@ import { RegisterPage } from './pages/register-page/register-page.component';
 import { SinglePageProduct } from './pages/single-page-product/single-page-product.component';
 import { DashboardPage } from './pages/dashboard-page/dashboard-page.component';
 import { SuccessPage } from './pages/success-page/success-page.component';
+import { ContactsPage } from './pages/contacts-page/contacts-page.component';
 
 const routes: Routes = [
+  { path: ':language/contacts', component: ContactsPage, canActivate: [LanguageGuard] },
   { path: ':language/success', component: SuccessPage, canActivate: [LanguageGuard] },
   { path: ':language/dashboard', component: DashboardPage, canActivate: [LanguageGuard] },
   { path: ':language/home', component: HomePage, canActivate: [LanguageGuard] },

@@ -16,7 +16,7 @@ import { OrderResponse, StatusEnum } from '../../models/orders-response.model';
                 <form (ngSubmit)="saveOrder()">
                     <div class="form-group">
                         <label for="title">Order number:</label>
-                        <input type="text" class="form-control" id="title" name="title" required [(ngModel)]="order.id">
+                        <input type="text" class="form-control" id="id" name="id" required [(ngModel)]="order.id">
                     </div>
                     <div class="form-group">
                         <label for="status">Order Status:</label>

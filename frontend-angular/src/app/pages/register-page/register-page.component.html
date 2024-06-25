@@ -1,34 +1,37 @@
-<div class="login-page">
-  <div class="login-container">
-    <h1>Login</h1>
-    <form (ngSubmit)="register()" [formGroup]="loginForm">
-      <div class="input-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" formControlName="email">
-        <div *ngIf="loginForm?.get('email')?.hasError('required') && loginForm.get('email')?.touched" class="error">Email é obrigatório.</div>
-        <div *ngIf="loginForm.get('email')?.hasError('email') && loginForm.get('email')?.touched" class="error">Email não é válido.</div>
-      </div>
-      <div class="input-group">
-        <label for="username">Username</label>
-        <input type="text" id="username" formControlName="username">
-        <div *ngIf="loginForm.get('username')?.hasError('required') && loginForm.get('username')?.touched" class="error">Username é obrigatório.</div>
-      </div>
-      <div class="input-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" formControlName="password">
-        <div *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched" class="error">Password é obrigatória.</div>
-        <div *ngIf="loginForm.get('password')?.hasError('invalidPassword')" class="error">
-          A senha deve ter pelo menos 8 caracteres, uma letra minúscula e qualquer caractere especial.
+<div class="container-fluid h-100">
+  <div class="login-page">
+    <div class="login-container">
+      <h1>Registo</h1>
+      <form (ngSubmit)="register()" [formGroup]="loginForm">
+        <div class="input-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" formControlName="email">
+          <div *ngIf="loginForm?.get('email')?.hasError('required') && loginForm.get('email')?.touched" class="error">Email é obrigatório.</div>
+          <div *ngIf="loginForm.get('email')?.hasError('email') && loginForm.get('email')?.touched" class="error">Email não é válido.</div>
         </div>
-      </div>
-      <div class="input-group">
-        <label for="repeat_password">Repetir Password</label>
-        <input type="password" id="repeat_password" formControlName="repeat_password">
-        <div *ngIf="loginForm.get('repeat_password')?.hasError('required') && loginForm.get('repeat_password')?.touched" class="error">Confirmação de Password é obrigatória.</div>
-        <div *ngIf="loginForm.hasError('passwordMismatch')" class="error">As passwords não coincidem.</div>
-      </div>
-      <button type="submit" [disabled]="loginForm.invalid">Register</button>
-      <a [href]="language + '/login'">Já tenho uma conta</a>
-    </form>
+        <div class="input-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" formControlName="username">
+          <div *ngIf="loginForm.get('username')?.hasError('required') && loginForm.get('username')?.touched" class="error">Username é obrigatório.</div>
+        </div>
+        <div class="input-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" formControlName="password">
+          <div *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched" class="error">Password é obrigatória.</div>
+          <div *ngIf="loginForm.get('password')?.hasError('invalidPassword')" class="error">
+            A senha deve ter pelo menos 8 caracteres, uma letra maiuscula e qualquer caractere especial.
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="repeat_password">Repetir Password</label>
+          <input type="password" id="repeat_password" formControlName="repeat_password">
+          <div *ngIf="loginForm.get('repeat_password')?.hasError('required') && loginForm.get('repeat_password')?.touched" class="error">Confirmação de Password é obrigatória.</div>
+          <div *ngIf="loginForm.hasError('passwordMismatch')" class="error">As passwords não coincidem.</div>
+        </div>
+        <button type="submit" [disabled]="loginForm.invalid">Register</button>
+        <a [href]="language + '/login'">Já tenho uma conta</a>
+      </form>
+    </div>
   </div>
+  
 </div>

@@ -48,10 +48,30 @@ table {
     border-radius: 20px;
     text-transform: lowercase;
     background-color: #f2f2f2;
-    font-size: 16px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
 }
 
-.status.TO_SEND {
+.status.POR_ENVIAR {
     background-color: rgb(35, 75, 206);
+    color: white;
+}
+
+.status.ENVIADO {
+    background-color: rgb(35, 200, 206);
+    color: white;
+}
+
+
+.status.ESPERA_PAGAMENTO {
+    background-color: rgb(161, 91, 26);
+    color: white;
+}
+
+.status.COMPLETO {
+    background-color: rgb(13, 110, 13);
     color: white;
 }

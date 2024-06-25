@@ -56,7 +56,7 @@ export class SinglePageProduct {
 
         } catch (error) {
 
-            this.toastService.showErrorToast("Erro ao obter produtos!");
+            this.toastService.showErrorToast("Erro ao obter produtos");
         }
         return response;
     }
@@ -64,13 +64,13 @@ export class SinglePageProduct {
     async saveProduct(product: Product) {
       if (!product.id) {
         this.toastService.showLoadingToast(
-          "Produto a ser alterado",
+          "Produto a ser adicionado",
           "Produto adicionado com sucesso",
           () => this.httpClient.post(`${environment.apiUrl}/${this.language}/store/add`, product).toPromise(),
         );
       } else {
         this.toastService.showLoadingToast(
-          "Produto a ser adicionado",
+          "Produto a ser alterado",
           "Produto alterado com sucesso",
           () => this.httpClient.put(`${environment.apiUrl}/${this.language}/store/edit/${product.id}`, product).toPromise(),
         );
@@ -98,7 +98,7 @@ export class SinglePageProduct {
     }
 
     addToCart() {
-      this.toastService.showSuccessToast("Produto adicionado com sucesso à shopping cart");
+      this.toastService.showSuccessToast("Produto adicionado ao carrinho");
 
       this.shoppingService.addProduct(this.product!);
     }

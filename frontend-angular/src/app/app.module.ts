@@ -36,6 +36,8 @@ import { SinglePageProduct } from './pages/single-page-product/single-page-produ
 import { DynamicPaginationComponent } from './components/dynamic-pagination/dynamic-pagination.component';
 import { DashboardPage } from './pages/dashboard-page/dashboard-page.component';
 import { ModalUserComponent } from './components/modal-order-component/modal-order.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { ContactsPage } from './pages/contacts-page/contacts-page.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, '/assets/i18n/', '.json');
@@ -60,6 +62,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ProductRowComponent,
     DynamicPaginationComponent,
     ModalUserComponent,
+    FooterComponent,
+    ContactsPage,
     HomePage,
     StorePage,
     LogoutPage,

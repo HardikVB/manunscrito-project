@@ -72,7 +72,7 @@ export class RegisterPage implements OnInit {
     passwordValidator = (): ValidatorFn => {
       return (control: AbstractControl): { [key: string]: boolean } | null => {
         const password = control.value;
-        // Regex para validar se a senha tem pelo menos 8 caracteres, uma letra minúscula e qualquer caractere especial
+        
         const regex = /^(?=[^A-Z]*[A-Z])(?=[^!"#$%&'()*+,-.:;<=>?@[\]^_`{|}~]*[!"#$%&'()*+,-.:;<=>?@[\]^_`{|}~])(?=\D*\d).{8,}$/;
         
         if (!regex.test(password)) {

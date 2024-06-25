@@ -8,7 +8,16 @@
         </ul>
       </div>
       <div class="col-10">
-        <dynamic-pagination [pageSize]="pageSize" [currentPage]="currentPage" [totalItems]="totalCount" [items]="data" (clickItem)="checkOrderInfo($event)" (clickProduct)="checkProductInfo($event)" (clickNextPage)="nextPage()" (clickPreviousPage)="previousPage()"></dynamic-pagination>
+        <dynamic-pagination 
+        [pageSize]="pageSize" 
+        [currentPage]="currentPage" 
+        [totalItems]="totalCount" 
+        [items]="data" 
+        (clickItem)="checkOrderInfo($event)" 
+        (clickProduct)="checkProductInfo($event)" 
+        (clickNextPage)="nextPage()" 
+        (clickPreviousPage)="previousPage()"
+        (changePageSize)="pageSizeChanged($event)"></dynamic-pagination>
       </div>
     </div>
   </div>

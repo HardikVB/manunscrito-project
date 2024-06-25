@@ -5,6 +5,8 @@ import { Product } from '../utils/db';
 import { verifyAdminPrivilage } from '../utils/auth';
 import { ProductResponse } from '../models/product-response.model';
 import { ProductRequest } from '../models/product-request.model';
+import { Order } from '../db/orders-db';
+import { OrderProducts } from '../db/order-products';
 const router = express.Router();
 
 interface LanguageRequest extends Request {

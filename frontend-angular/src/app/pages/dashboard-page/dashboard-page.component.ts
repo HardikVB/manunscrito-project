@@ -84,7 +84,11 @@ export class DashboardPage {
     this.toastService.showLoadingToast("A guardar a order: " + order.id, "Foi salva a order: " + order.id, () => this.httpClient.put(`${environment.apiUrl}/${this.language}/dashboard/orders?id=${order.id}`, order).toPromise().then(() => {
       this.getItems()
     }))
+  }
 
-    
+  pageSizeChanged(option: number) {
+    this.pageSize = option;
+
+    this.toastService.showLoadingToast("A obter encomendas", "As encomendas foram obtidas com sucesso", () => this.getItems());
   }
 }

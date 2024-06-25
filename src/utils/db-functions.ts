@@ -59,14 +59,14 @@ async function getOrderId(orderID: number): Promise<Order | null> {
   }
 }
 
-async function getOrders(page = 1, pageSize = 10): Promise<any> {
+async function getOrders(page = 1, pageSize = 10): Promise<{count: number, rows: Order[]}> {
   const offset = (page - 1) * pageSize;
 
   try {
     const count = await Order.count();
 
     const orders = await Order.findAll({
-      include: [{model: Product, as: 'products', include: [{model: ProductTranslation, as: 'translations', required: false}], required: false}, {model: User, as: 'users', required: false}],
+      include: [{model: Product, as: 'products', required: true, include: [{model: ProductTranslation, as: 'translations', required: false}]}, {model: User, as: 'users', required: true}],
       limit: pageSize,
       offset: offset,
     });
@@ -82,7 +82,7 @@ async function getOrders(page = 1, pageSize = 10): Promise<any> {
 async function addProductsToOrder(userId: number, products: Product[]): Promise<Order> {
   try {
     // Cria uma nova ordem associada ao usuário
-    const order = await Order.create({ userId: userId, status: StatusEnum.WAITING_PAYMENT });
+    const order = await Order.create({ userId: userId, status: StatusEnum.ESPERA_PAGAMENTO });
 
     await order.save();
 

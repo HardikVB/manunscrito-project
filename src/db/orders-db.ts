@@ -12,10 +12,10 @@ interface OrderAttributes {
 interface OrderCreationAttributes extends Optional<OrderAttributes, 'id'> {}
 
 export enum StatusEnum {
-  TO_SEND = "TO SEND",
-  WAITING_PAYMENT = "WAITING_PAYMENT",
-  SENDED = "SENDED",
-  COMPLETE = "COMPLETE"
+  POR_ENVIAR = "POR_ENVIAR",
+  ESPERA_PAGAMENTO = "ESPERA_PAGAMENTO",
+  ENVIADO = "ENVIADO",
+  COMPLETO = "COMPLETO"
 }
 
 class Order extends Model<OrderAttributes, OrderCreationAttributes> implements OrderAttributes {

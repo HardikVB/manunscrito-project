@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ToastService } from '../../service/toast.service';
 import { ToastType } from '../../models/toast.model';
 import { AuthService } from '../../service/auth.service';
+import { ShoppingService } from '../../service/shopping.service';
 
 @Component({
   selector: 'app-logout-page',
@@ -10,7 +11,7 @@ import { AuthService } from '../../service/auth.service';
 })
 export class LogoutPage implements OnInit {
 
-  constructor(private router: Router, private toastService: ToastService, private authService: AuthService) { }
+  constructor(private router: Router, private toastService: ToastService, private authService: AuthService, private shoppingService: ShoppingService) { }
 
   ngOnInit(): void {
     
@@ -18,8 +19,9 @@ export class LogoutPage implements OnInit {
 
     this.toastService.showSuccessToast("Desconectado com sucesso!")
 
-    // Redirecionar para a página inicial
-    this.router.navigate(['/'])
+    this.shoppingService.getProducts().forEach((p) => this.shoppingService.removeProduct(p.id));
+
+    this.router.navigate(['/pt'])
   }
 
 }

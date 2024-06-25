@@ -18,7 +18,7 @@ router.get("/orders", async (req: LanguageRequest, res: Response) => {
     const page = parseInt(req.query.page as string) || 1;
     const pageSize = parseInt(req.query.pageSize as string) || 10;
 
-    const { count, rows } = await getOrders(page, pageSize);
+    let { count, rows } = await getOrders(page, pageSize);
 
     rows.forEach((item: Order) => {
         item.products.forEach((product) => {
